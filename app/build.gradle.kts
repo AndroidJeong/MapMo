@@ -1,3 +1,10 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val properties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -15,6 +22,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        addManifestPlaceholders(mapOf("NAVERMAP_CLIENT_ID" to properties.getProperty("NAVERMAP_CLIENT_ID")))
+
     }
 
     buildTypes {
@@ -35,6 +45,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -50,8 +61,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-
+    //NaverMap
+    implementation (libs.map.sdk)
+    //FusedLocationProviderClient
+    implementation (libs.play.services.location)
+    //사용자 위치
+    implementation (libs.play.services.location)
 
 
 
