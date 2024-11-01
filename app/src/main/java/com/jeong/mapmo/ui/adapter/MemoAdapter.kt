@@ -1,9 +1,11 @@
 package com.jeong.mapmo.ui.adapter
 
+import android.content.Context
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jeong.mapmo.R
@@ -24,10 +26,17 @@ class MemoAdapter : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()
 
                     tvMemoitemTitle.maxLines =
                         if (currentList[adapterPosition].expand) Int.MAX_VALUE else 1
+
+                    tvMemoitemLocationtext.maxLines =
+                        if (currentList[adapterPosition].expand) Int.MAX_VALUE else 1
+
                 }
 
                 cbMemoitemCheckbox.setOnClickListener {
                     tvMemoitemTitle.paintFlags =
+                        if(cbMemoitemCheckbox.isChecked) Paint.STRIKE_THRU_TEXT_FLAG else 0
+
+                    tvMemoitemLocationtext.paintFlags =
                         if(cbMemoitemCheckbox.isChecked) Paint.STRIKE_THRU_TEXT_FLAG else 0
                 }
 
@@ -46,15 +55,15 @@ class MemoAdapter : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()
                     if(item.isClamped) removeItem(adapterPosition)
                 }
 
-                ivMemoitemPriority.apply {
+                ivMemoitemBackground.apply {
                     when (item.priority) {
-                        PriorityColor.RED -> setImageResource(R.color.red)
+                        PriorityColor.RED -> setBackgroundResource(R.color.red)
                         PriorityColor.YELLOW -> setImageResource(R.color.yellow)
                         PriorityColor.BLUE -> setImageResource(R.color.blue)
                     }
-                    ivMemoitemPriority.clipToOutline = true
                 }
                 tvMemoitemTitle.text = item.title
+                tvMemoitemLocationtext.text = "장소가 들어갈 자리"
                 tvMemoitemDetail.text = item.detail
 
             }

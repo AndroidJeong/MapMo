@@ -1,14 +1,7 @@
 package com.jeong.mapmo.ui.view
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
-import com.jeong.mapmo.R
 import com.jeong.mapmo.data.PriorityColor
 import com.jeong.mapmo.data.dto.Memo
 import com.jeong.mapmo.databinding.FragmentMemoBinding
@@ -35,7 +28,7 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
 
         val a = listOf<Memo>(
             Memo("1","제목11111111111111111111111111111111111111111111111111111111111111111111", 1.1,2.2,"디테일1", PriorityColor.RED),
-            Memo("2","제목2222222222222222222", 1.1,2.2,"디테일2", PriorityColor.YELLOW ),
+            Memo("2","제목2222222222222222222", 1.1,2.2,"디테일2222222222222222222222222222222222222222222222222", PriorityColor.YELLOW ),
             Memo("3","제목3333333333", 1.1,2.2,"디테일3", PriorityColor.BLUE ),
             Memo("4","제목444444", 1.1,2.2,"디테일4", PriorityColor.RED),
             Memo("5","제목5555", 1.1,2.2,"디테일5", PriorityColor.RED ),

@@ -193,4 +193,9 @@ class SwipeHelper : ItemTouchHelper.Callback() {  // ItemTouchHelper.Callback �
 
 }
 
-//  스와이프를 하던 손 or 마우스를 떼는 순간 getSwipeThreshold 호출되며, 여기서 isClamped 가 true 가 될지, false가 될 지를 정한다!!!
+//  스와이프를 하던 손 or 마우스를 떼는 순간 getSwipeThreshold 호출되며, 여기서 isClamped 가 true 가 될지, false가 될 지를 정한다
+
+/*
+https://velog.io/@nimok97/RecyclerView-%EC%97%90%EC%84%9C-item-Swipe-%ED%95%98%EA%B8%B0-feat.-ItemTouchHelper-ItemTouchUIUtil
+ */
+

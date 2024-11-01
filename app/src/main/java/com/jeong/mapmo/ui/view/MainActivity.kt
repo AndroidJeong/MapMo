@@ -47,10 +47,3 @@ class MainActivity : AppCompatActivity() {
 
 
 }
-
-/*
-툴바: ConstraintLayout? , 아이콘 크기?
-
-
-
- */
