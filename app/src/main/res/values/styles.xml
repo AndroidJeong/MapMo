@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Container -->
+    <style name="AppContainer">
+        <item name="background">@color/white</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+    </style>
+
+    <!-- Text Style -->
+    <style name="AppTextTitle32" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTextDescription16" parent="TextAppearance.Material3.BodyLarge" />
+
+    <style name="AppRoundedImage">
+        <item name="cornerSize">50dp</item>
+    </style>
+</resources>
