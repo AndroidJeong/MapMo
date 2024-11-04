@@ -22,7 +22,7 @@
             android:value="${NAVERMAP_CLIENT_ID}"
             />
         <activity
-            android:name=".ui.view.MainActivity"
+            android:name=".ui.view.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.view.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -61,6 +61,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Splashscreen
+    implementation(libs.androidx.core.splashscreen)
+
+    // Lottie
+    implementation(libs.lottie)
     //NaverMap
     implementation (libs.map.sdk)
     //FusedLocationProviderClient
