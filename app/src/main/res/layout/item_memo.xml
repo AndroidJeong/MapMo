@@ -41,7 +41,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_edit_note_24"
-                    android:backgroundTint="@color/blue"
+                    android:backgroundTint="@color/green"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_memoitem_erase"
                     app:layout_constraintTop_toTopOf="parent"

@@ -1,15 +1,13 @@
 package com.jeong.mapmo.ui.adapter
 
-import android.content.Context
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jeong.mapmo.R
-import com.jeong.mapmo.data.PriorityColor
+import com.jeong.mapmo.data.common.PriorityColor
 import com.jeong.mapmo.data.dto.Memo
 import com.jeong.mapmo.databinding.ItemMemoBinding
 
@@ -59,7 +57,7 @@ class MemoAdapter : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()
                     when (item.priority) {
                         PriorityColor.RED -> setBackgroundResource(R.color.red)
                         PriorityColor.YELLOW -> setImageResource(R.color.yellow)
-                        PriorityColor.BLUE -> setImageResource(R.color.blue)
+                        PriorityColor.Green -> setImageResource(R.color.green)
                     }
                 }
                 tvMemoitemTitle.text = item.title

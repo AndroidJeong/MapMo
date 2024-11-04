@@ -1,7 +1,7 @@
-package com.jeong.mapmo.data
+package com.jeong.mapmo.data.common
 
 enum class PriorityColor(num:Int) {
     RED(1),
     YELLOW(2),
-    BLUE(3)
+    Green(3)
 }

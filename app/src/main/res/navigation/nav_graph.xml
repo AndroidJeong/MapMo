@@ -9,10 +9,19 @@
         android:id="@+id/memoFragment"
         android:name="com.jeong.mapmo.ui.view.MemoFragment"
         android:label="fragment_memo"
-        tools:layout="@layout/fragment_memo" />
+        tools:layout="@layout/fragment_memo" >
+        <action
+            android:id="@+id/action_memoFragment_to_memoAddFragment"
+            app:destination="@id/memoAddFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.jeong.mapmo.ui.view.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/memoAddFragment"
+        android:name="com.jeong.mapmo.ui.view.MemoAddFragment"
+        android:label="fragment_memo_add"
+        tools:layout="@layout/fragment_memo_add" />
 </navigation>
