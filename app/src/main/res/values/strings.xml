@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MapMo</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="spinner_red">1순위</string>
+    <string name="spinner_yellow">2순위</string>
+    <string name="spinner_green">3순위</string>
+    <string name="title_hint">제목</string>
+    <string name="detail_hint">내용</string>
 </resources>

@@ -1,6 +1,17 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val properties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
+    id ("kotlin-kapt")
+    id ("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -15,6 +26,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        addManifestPlaceholders(mapOf("NAVERMAP_CLIENT_ID" to properties.getProperty("NAVERMAP_CLIENT_ID")))
+
     }
 
     buildTypes {
@@ -27,14 +41,16 @@ android {
         }
     }
     compileOptions {
+        //hilt사용시 자바 8버젼 사용
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
+    buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -45,6 +61,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -54,4 +72,19 @@ dependencies {
 
     // Lottie
     implementation(libs.lottie)
+    //NaverMap
+    implementation (libs.map.sdk)
+    //FusedLocationProviderClient
+    implementation (libs.play.services.location)
+    //사용자 위치
+    implementation (libs.play.services.location)
+    //room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    //ksp
+    ksp(libs.room.compiler)
+    //hilt ksp는 알파버젼이라 kapt사용
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.compiler)
+
 }
