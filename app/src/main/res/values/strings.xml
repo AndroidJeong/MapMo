@@ -5,4 +5,5 @@
     <string name="onboarding_01">GPS 기반 메모 알림을 위해\n몇가지 권한 허용이 필요 합니다.\n\n해당 권한은 추후 변경이 가능 합니다.</string>
     <string name="onboarding_skip">Skip</string>
     <string name="onboarding_next">다음</string>
+    <string name="onboarding_done">완료</string>
 </resources>
