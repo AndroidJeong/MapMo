@@ -28,7 +28,10 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
+import dagger.hilt.android.AndroidEntryPoint
 
+//메모에 있는 장소 핀으로 보여주는 곳
+@AndroidEntryPoint
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
 
     private lateinit var naverMap: NaverMap
@@ -46,6 +49,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainContext)
         if (!hasPermission()) {
             requestLocationPermission() // 권한 요청
+            initMapView()
         } else {
             initMapView() // 맵뷰 초기화
         }
@@ -169,7 +173,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
 
-
-
-
 }
+/*
+https://velog.io/@nahy-512/AndroidKotlin-naverMap2
+ */

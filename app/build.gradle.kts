@@ -8,6 +8,10 @@ val properties = Properties().apply {
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
+    id ("kotlin-kapt")
+    id ("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -37,6 +41,7 @@ android {
         }
     }
     compileOptions {
+        //hilt사용시 자바 8버젼 사용
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -64,7 +69,6 @@ dependencies {
 
     // Splashscreen
     implementation(libs.androidx.core.splashscreen)
-
     // Lottie
     implementation(libs.lottie)
     //NaverMap
@@ -73,6 +77,14 @@ dependencies {
     implementation (libs.play.services.location)
     //사용자 위치
     implementation (libs.play.services.location)
+    //room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    //ksp
+    ksp(libs.room.compiler)
+    //수정 hilt ksp는 알파버젼이라 kapt사용 -> ksp 1.2.0
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.compiler)
 
 
 

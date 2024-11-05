@@ -1,4 +1,9 @@
 package com.jeong.mapmo.ui.viewModel
 
-class MapViewModel {
+import androidx.lifecycle.ViewModel
+
+class MapViewModel () : ViewModel() {
+
+
+
 }
