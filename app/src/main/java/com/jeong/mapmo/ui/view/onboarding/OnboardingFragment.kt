@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jeong.mapmo.databinding.FragmentOnboardingBinding
 import com.jeong.mapmo.domain.repository.ResourceRepository
 import com.jeong.mapmo.ui.view.onboarding.component.OnboardingAdapter
+import kotlinx.coroutines.launch
 
 class OnboardingFragment : Fragment() {
     private var _binding: FragmentOnboardingBinding? = null
@@ -30,21 +32,50 @@ class OnboardingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = OnboardingAdapter(this, viewModel.onboardingItems)
+        val adapter = OnboardingAdapter(this, viewModel.onboardingItems.value)
         binding.vpContainer.adapter = adapter
+        viewModel.totalItemCount = adapter.itemCount
+
         binding.vpContainer.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                viewModel.onboardingItemIndex.value = position
+                viewModel.updatePage(position)
             }
         })
 
         TabLayoutMediator(binding.tabIndicator, binding.vpContainer) { tab, position ->
-
         }.attach()
 
-        viewModel.onboardingItemIndex.observe(viewLifecycleOwner) {
-            binding.vpContainer.currentItem = it
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.currentPage.collect { page ->
+                binding.vpContainer.currentItem = page
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isSkipVisible.collect { isVisible ->
+                binding.btnSkip.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isDoneVisible.collect { isVisible ->
+                binding.btnDone.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isNextVisible.collect { isVisible ->
+                binding.btnNext.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+            }
+        }
+
+        binding.btnNext.setOnClickListener {
+            viewModel.goToNextPage()
+        }
+
+        binding.btnSkip.setOnClickListener {
+            viewModel.updatePage(viewModel.totalItemCount - 1)
         }
     }
 

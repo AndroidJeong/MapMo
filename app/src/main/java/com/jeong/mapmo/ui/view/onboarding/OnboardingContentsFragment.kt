@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.jeong.mapmo.databinding.FragmentOnboardingContentsBinding
 import com.jeong.mapmo.domain.repository.ResourceRepository
+import kotlinx.coroutines.launch
 
 class OnboardingContentsFragment : Fragment() {
     private var _binding: FragmentOnboardingContentsBinding? = null
@@ -31,30 +33,19 @@ class OnboardingContentsFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel.onboardingItemIndex.observe(viewLifecycleOwner) {
-            updateUI(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.currentPage.collect {
+                updateUI(it)
+            }
         }
-        // moveToNextItem()
     }
 
     private fun updateUI(currentIndex: Int) {
-        val currentItem = viewModel.onboardingItems[currentIndex]
+        val currentItem = viewModel.onboardingItems.value[currentIndex]
         binding.tvTitle.text = currentItem.title
         binding.ivOnboarding.setImageResource(currentItem.image)
         binding.tvDescription.text = currentItem.description
-        // binding.btnOnboarding.text = currentItem.buttonText
     }
-
-//    private fun moveToNextItem() {
-//        binding.btnOnboarding.setOnClickListener {
-//            val nextItem = viewModel.onboardingItemIndex.value?.plus(1)
-//            if (nextItem != null && nextItem < viewModel.onboardingItems.size) {
-//                viewModel.onboardingItemIndex.value = nextItem
-//            } else {
-//                activity?.finish()
-//            }
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
