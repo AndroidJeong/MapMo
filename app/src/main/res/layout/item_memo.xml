@@ -23,9 +23,8 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_memoitem_edit"
             android:layout_width="50dp"
-            android:layout_height="0dp"
+            android:layout_height="50dp"
             android:background="@drawable/ic_edit_note_24"
-            android:scaleType="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,10 +32,9 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_memoitem_erase"
             android:layout_width="50dp"
-            android:layout_height="0dp"
+            android:layout_height="50dp"
             android:background="@drawable/ic_delete_24"
             android:backgroundTint="@color/red"
-            android:scaleType="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iv_memoitem_edit"
             app:layout_constraintTop_toTopOf="parent" />

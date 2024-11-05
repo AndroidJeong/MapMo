@@ -149,10 +149,6 @@ class SwipeHelper : ItemTouchHelper.Callback() {  // ItemTouchHelper.Callback Ïù
                 View.GONE
         }
 
-
-
-
-
         return 2f
     }
 
