@@ -14,5 +14,6 @@ room - 아래 다 넣고 , dao만 따로 빼는지 or 지금처럼?
 2.룸엔티티랑 어뎁터 리스트랑 통일 -> mapper
 
 
+
 https://velog.io/@nagosooo/5.Room-with-Hilt
  */

@@ -53,6 +53,4 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
 
     }
 
-
-
 }

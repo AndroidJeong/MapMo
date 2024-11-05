@@ -37,4 +37,5 @@
             android:id="@+id/action_memoMapFragment_to_memoAddFragment"
             app:destination="@id/memoAddFragment" />
     </fragment>
+
 </navigation>

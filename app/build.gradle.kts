@@ -85,7 +85,4 @@ dependencies {
     //수정 hilt ksp는 알파버젼이라 kapt사용 -> ksp 1.2.0
     implementation (libs.hilt.android)
     kapt (libs.hilt.compiler)
-
-
-
 }
