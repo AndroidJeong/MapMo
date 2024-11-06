@@ -83,7 +83,7 @@ class OnboardingViewModel(private val resourceRepository: ResourceRepository) : 
             )
         )
         _onboardingItems.value = dummyData
-        totalItemCount = dummyData.size  // 총 아이템 개수 설정
+        totalItemCount = dummyData.size
     }
 
     fun updatePage(position: Int) {

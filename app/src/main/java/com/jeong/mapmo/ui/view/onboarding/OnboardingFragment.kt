@@ -77,6 +77,10 @@ class OnboardingFragment : Fragment() {
         binding.btnSkip.setOnClickListener {
             viewModel.updatePage(viewModel.totalItemCount - 1)
         }
+
+        binding.btnDone.setOnClickListener {
+            activity?.finish()
+        }
     }
 
     override fun onDestroyView() {

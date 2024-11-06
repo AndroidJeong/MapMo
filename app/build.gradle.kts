@@ -10,8 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
-    id("com.google.devtools.ksp")
-    id ("com.google.dagger.hilt.android")
+    alias(libs.plugins.devtools.ksp)
 }
 
 android {
@@ -28,7 +27,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         addManifestPlaceholders(mapOf("NAVERMAP_CLIENT_ID" to properties.getProperty("NAVERMAP_CLIENT_ID")))
-
     }
 
     buildTypes {
@@ -48,7 +46,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
         buildConfig = true
     }
@@ -76,19 +74,17 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    
+
     //NaverMap
-    implementation (libs.map.sdk)
+    implementation(libs.map.sdk)
+
     //FusedLocationProviderClient
-    implementation (libs.play.services.location)
+    implementation(libs.play.services.location)
+
     //사용자 위치
-    implementation (libs.play.services.location)
+    implementation(libs.play.services.location)
+
     //room
     implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.room.compiler)
-    //ksp
     ksp(libs.room.compiler)
-    //hilt ksp는 알파버젼이라 kapt사용
-    implementation (libs.hilt.android)
-    kapt (libs.hilt.compiler)
 }

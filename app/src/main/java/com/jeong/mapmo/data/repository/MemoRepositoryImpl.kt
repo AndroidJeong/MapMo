@@ -2,13 +2,10 @@ package com.jeong.mapmo.data.repository
 
 import com.jeong.mapmo.data.db.MemoDatabase
 import com.jeong.mapmo.data.entities.MemoEntity
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class MemoRepositoryImpl @Inject constructor(
+class MemoRepositoryImpl(
     private val db: MemoDatabase
-): MemoRepository{
+) : MemoRepository {
 
     override suspend fun insertMemo(memo: MemoEntity) {
         db.memoDao().insertTodo(memo)
@@ -20,7 +17,4 @@ class MemoRepositoryImpl @Inject constructor(
 
     override suspend fun getAllMemo() =
         db.memoDao().getAllTodo()
-
-
-
 }

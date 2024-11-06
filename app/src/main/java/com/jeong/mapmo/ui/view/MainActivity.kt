@@ -1,5 +1,6 @@
 package com.jeong.mapmo.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,13 +10,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.jeong.mapmo.R
-import com.jeong.mapmo.data.db.MemoDatabase
 import com.jeong.mapmo.databinding.ActivityMainBinding
-import dagger.hilt.EntryPoint
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import com.jeong.mapmo.ui.view.onboarding.OnboardingActivity
 
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {
@@ -32,15 +30,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
-
+        goToOnboarding()
         initNavHost()
         setBottomNavi()
 
     }
 
-
     private fun initNavHost() {
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(binding.fcvMain.id) as NavHostFragment
         navController = navHostFragment.navController
@@ -50,5 +46,8 @@ class MainActivity : AppCompatActivity() {
         binding.bnvMain.setupWithNavController(navController)
     }
 
-
+    private fun goToOnboarding() {
+        val intent = Intent(this, OnboardingActivity::class.java)
+        startActivity(intent)
+    }
 }
