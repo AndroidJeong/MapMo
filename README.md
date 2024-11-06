@@ -1,14 +1,18 @@
-<p align="center">
+<h1 align="center">
 <img src="https://github.com/user-attachments/assets/41906c88-a782-4f33-a33b-a83feb10b55d", width="300" />
-</p>
+</h1>
+<p align="center"><b>위치 기반 메모 알림 서비스, MapMo</b></p>
 
-## Commit Convention
+## 🙌 Commit Convention
 
 | 타입 | 설명 |
 |:--:|--|
-| feat     | 기능, 사용자 경험에 변경이 있는 경우 (모든 커밋은 기본적으로 feat)|
-| refactor | 기능, 사용자 경험에 변경 없이 코드 구조를 개선한 경우 (패키지 변경, 변수명 변경, 가독성 개선 등) |
-| fix      | 이슈 또는 버그 해결 |
-| style    | 들여쓰기, 공백 등 코드 스타일 또는 여백/글자 크기 등 UI 요소의 변경 |
-| docs     | 주석, README.md 등 문서의 변경 |
-| chore    | 라이브러리 업데이트 및 기타 변경사항 |
+| feat | 새로운 기능에 대한 커밋 |
+| docs | 문서 수정에 대한 커밋 |
+| fix | 버그 수정에 대한 커밋 |
+| build | 빌드 관련 파일 수정에 대한 커밋 |
+| chore | 그 외 자잘한 수정에 대한 커밋 |
+| style | 코드 스타일 혹은 포맷 등에 관한 커밋 |
+| refactor | 코드 리팩토링에 대한 커밋 |
+| init | 초기 설정 |
+| design | UI 관련 커밋 |

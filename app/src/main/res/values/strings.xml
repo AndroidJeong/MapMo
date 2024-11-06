@@ -6,4 +6,10 @@
     <string name="onboarding_skip">Skip</string>
     <string name="onboarding_next">다음</string>
     <string name="onboarding_done">완료</string>
+
+    <string name="spinner_red">1순위</string>
+    <string name="spinner_yellow">2순위</string>
+    <string name="spinner_green">3순위</string>
+    <string name="title_hint">제목</string>
+    <string name="detail_hint">내용</string>
 </resources>
