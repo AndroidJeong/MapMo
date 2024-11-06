@@ -3,13 +3,7 @@ package com.jeong.mapmo.ui.view
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.location.Location
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,8 +12,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.jeong.mapmo.R
 import com.jeong.mapmo.databinding.FragmentMapBinding
-import com.jeong.mapmo.databinding.FragmentMemoBinding
-import com.jeong.mapmo.ui.adapter.MemoAdapter
 import com.jeong.mapmo.util.BaseFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -28,11 +20,9 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
-import dagger.hilt.android.AndroidEntryPoint
 
-//메모에 있는 장소 핀으로 보여주는 곳
-@AndroidEntryPoint
-class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate), OnMapReadyCallback {
+class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
+    OnMapReadyCallback {
 
     private lateinit var naverMap: NaverMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -44,7 +34,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         mainContext = context
     }
 
-    override fun initView()  {
+    override fun initView() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainContext)
         if (!hasPermission()) {
@@ -165,14 +155,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                     )
                 )
                 naverMap.moveCamera(cameraUpdate)
-
             }
-
-
-
     }
-
-
 }
 /*
 https://velog.io/@nahy-512/AndroidKotlin-naverMap2

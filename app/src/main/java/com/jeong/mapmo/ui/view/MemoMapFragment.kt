@@ -41,6 +41,4 @@ class MemoMapFragment : BaseFragment<FragmentMemoMapBinding>(FragmentMemoMapBind
         mapFragment.getMapAsync(this)
         locationSource = FusedLocationSource(this, 1)
     }
-
-
 }
