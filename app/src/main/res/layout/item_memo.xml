@@ -17,8 +17,7 @@
         android:id="@+id/cl_memoitem_erasearea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_memoitem_edit"
@@ -41,7 +40,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_memoitem_swipearea"
         android:layout_width="match_parent"
@@ -55,7 +53,6 @@
             app:layout_constraintEnd_toStartOf="@id/guideline_expand_start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_expand_start"
@@ -83,25 +80,25 @@
             android:id="@+id/iv_memoitem_locationimage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/ic_location_24"
-            app:layout_constraintStart_toEndOf="@id/guideline_expand_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_memoitem_title" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_memoitem_locationtext"
+            app:layout_constraintStart_toEndOf="@id/guideline_expand_start" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_memoitem_locationtext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginVertical="10dp"
             android:ellipsize="end"
-            android:gravity="start"
+            android:gravity="start|bottom"
             android:maxLines="1"
-            android:textSize="15sp"
+            android:textColor="#D3D3D3"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/cb_memoitem_checkbox"
             app:layout_constraintStart_toEndOf="@id/iv_memoitem_locationimage"
-            app:layout_constraintTop_toBottomOf="@+id/tv_memoitem_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_memoitem_title"
             tools:text="롯데마트 금천점" />
 
         <androidx.appcompat.widget.AppCompatCheckBox
@@ -133,7 +130,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_memoitem_locationtext" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.cardview.widget.CardView>
 
