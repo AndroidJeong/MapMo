@@ -158,6 +158,3 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             }
     }
 }
-/*
-https://velog.io/@nahy-512/AndroidKotlin-naverMap2
- */

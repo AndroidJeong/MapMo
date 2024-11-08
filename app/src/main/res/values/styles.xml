@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Container -->
+    <style name="AppContainer">
+        <item name="background">@color/white</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+    </style>
+
+    <!-- Image -->
+    <style name="AppRoundedImage">
+        <item name="cornerSize">50dp</item>
+    </style>
+
+    <!-- Text Style -->
+    <style name="AppTextTitle28" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTextDescription14" parent="TextAppearance.Material3.BodyMedium" />
+
+    <!-- Button -->
+    <style name="AppDefaultButtonText">
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppDefaultPrimaryButton" parent="AppDefaultButtonText">
+        <item name="android:gravity">center</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@drawable/background_primary_rounded_24</item>
+    </style>
+
+    <style name="AppDefaultGrayButton" parent="AppDefaultButtonText">
+        <item name="android:gravity">center</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@drawable/background_gray_rounded_24</item>
+    </style>
+</resources>

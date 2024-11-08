@@ -17,6 +17,7 @@ roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
 splashscreen = "1.1.0-rc01"
 lottie = "6.6.0"
+hiltAndroid= "2.48.1"
 ksp = "1.9.0-1.0.13"
 
 [libraries]

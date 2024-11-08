@@ -33,6 +33,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.view.onboarding.OnboardingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.MainActivity"
             android:exported="false" />
     </application>

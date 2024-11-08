@@ -68,6 +68,7 @@ dependencies {
 
     // Splashscreen
     implementation(libs.androidx.core.splashscreen)
+    
     // Lottie
     implementation(libs.lottie)
 
@@ -84,7 +85,7 @@ dependencies {
     //사용자 위치
     implementation(libs.play.services.location)
 
-    //room
+    // Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
 }
