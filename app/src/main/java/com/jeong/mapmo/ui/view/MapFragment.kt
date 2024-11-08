@@ -39,6 +39,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainContext)
         if (!hasPermission()) {
             requestLocationPermission() // 권한 요청
+            initMapView()
         } else {
             initMapView() // 맵뷰 초기화
         }

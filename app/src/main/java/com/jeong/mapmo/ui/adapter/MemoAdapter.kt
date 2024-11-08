@@ -19,7 +19,7 @@ class MemoAdapter : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()
                 root.setOnClickListener {
                     currentList[adapterPosition].expand = !currentList[adapterPosition].expand
 
-                    expandedViewMemoitem.visibility =
+                    tvMemoitemDetail.visibility =
                         if (currentList[adapterPosition].expand) View.VISIBLE else View.GONE
 
                     tvMemoitemTitle.maxLines =

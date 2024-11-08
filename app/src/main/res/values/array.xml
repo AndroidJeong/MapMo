@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_list">
+        <item>1순위</item>
+        <item>2순위</item>
+        <item>3순위</item>
+    </string-array>
+</resources>

@@ -46,11 +46,6 @@ class SwipeHelper : ItemTouchHelper.Callback() {  // ItemTouchHelper.Callback �
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         //super.clearView(recyclerView, viewHolder)
 
-
-//        with(viewHolder.itemView.findViewById<View>(R.id.cl_memoitem_erasearea)){
-//            if (this.visibility == View.GONE) this.visibility == View.VISIBLE else this.visibility == View.GONE
-//        }
-
         currentDx = 0f
         getDefaultUIUtil().clearView(getView(viewHolder))
         previousPosition = viewHolder.adapterPosition
@@ -82,13 +77,12 @@ class SwipeHelper : ItemTouchHelper.Callback() {  // ItemTouchHelper.Callback �
             val view = getView(viewHolder)
 
             val isClamped = getClamped(viewHolder as MemoAdapter.ViewHolder)
-            //val isClamped =getTag(viewHolder)
 
             val x = clampViewPositionHorizontal(view, dX, isClamped, isCurrentlyActive)
             //Log.d("AppTest", "dX : ${dX}, dY : ${dY}")
 
             currentDx = x
-            Log.d("AppTest", "x : ${x}")
+            //Log.d("AppTest", "x : ${x}")
 
             getDefaultUIUtil().onDraw(
                 c,
@@ -141,11 +135,8 @@ class SwipeHelper : ItemTouchHelper.Callback() {  // ItemTouchHelper.Callback �
         //return super.getSwipeThreshold(viewHolder)
 
         Log.d("AppTest", "getSwipeThreshold")
-        //val isClamped = getClamped(viewHolder as RvAdapter.MyDataViewHolder)
-        //val isClamped =getTag(viewHolder)
 
         // 현재 View가 고정되어있지 않고 사용자가 -clamp 이상 swipe시 isClamped true로 변경 아닐시 false로 변경 처리 할 것!!!
-
         Log.d("AppTest", "isClamped = ${currentDx <= -clamp}")
         //setTag(viewHolder, currentDx <= -clamp)  // 스와이프 되고 오른쪽 스와이프 시에만 닫히도록 하게하기 위해  '!isClamped && ' 조건 제거
         setClamped(viewHolder as MemoAdapter.ViewHolder, currentDx <= -clamp)

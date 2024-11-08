@@ -33,7 +33,7 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
         }
 
         binding.ivMemoToolplus.setOnClickListener {
-            findNavController().navigate(R.id.action_memoFragment_to_memoAddFragment)
+            findNavController().navigate(R.id.action_memoFragment_to_memoMapFragment)
         }
 
         val a = listOf<Memo>(

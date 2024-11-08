@@ -1,167 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="15dp"
     android:layout_marginTop="15dp"
-    android:layout_marginBottom="15dp">
+    android:layout_marginBottom="15dp"
+    app:cardCornerRadius="35dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_memoitem_erasearea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="35dp">
+        android:visibility="gone">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_memoitem_edit"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_edit_note_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_memoitem_erasearea"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/black"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintWidth_percent="0.3">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_memoitem_erase"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_delete_24"
+            android:backgroundTint="@color/red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_memoitem_edit"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_memoitem_erase"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_delete_24"
-                    android:backgroundTint="@color/red"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintWidth_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_memoitem_edit"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_edit_note_24"
-                    android:backgroundTint="@color/green"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iv_memoitem_erase"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.5" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_memoitem_swipearea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_memoitem_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline_expand_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_memoitem_swipearea"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_expand_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_memoitem_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/cb_memoitem_checkbox"
+            app:layout_constraintStart_toEndOf="@id/guideline_expand_start"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="치약 사기" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_memoitem_background"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/guideline"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_memoitem_locationimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_location_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_memoitem_locationtext"
+            app:layout_constraintStart_toEndOf="@id/guideline_expand_start" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_memoitem_locationtext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:ellipsize="end"
+            android:gravity="start|bottom"
+            android:maxLines="1"
+            android:textColor="#D3D3D3"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cb_memoitem_checkbox"
+            app:layout_constraintStart_toEndOf="@id/iv_memoitem_locationimage"
+            app:layout_constraintTop_toBottomOf="@id/tv_memoitem_title"
+            tools:text="롯데마트 금천점" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.15" />
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_memoitem_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_memoitem_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:maxLines="1"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@id/cb_memoitem_checkbox"
-                app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="치약 사기" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_expand_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.88" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_memoitem_locationimage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/ic_location_24"
-                app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/tv_memoitem_title" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_memoitem_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/guideline_expand_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_expand_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_memoitem_locationtext" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_memoitem_locationtext"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
-                android:layout_marginStart="10dp"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:maxLines="1"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toStartOf="@id/cb_memoitem_checkbox"
-                app:layout_constraintStart_toEndOf="@id/iv_memoitem_locationimage"
-                app:layout_constraintTop_toBottomOf="@+id/tv_memoitem_title"
-                tools:text="롯데마트 금천점" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/cb_memoitem_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/expanded_view_memoitem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_memoitem_locationtext">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_expand_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.15" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline_expand_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.88" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_memoitem_detail"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_expand_end"
-                    app:layout_constraintStart_toStartOf="@id/guideline_expand_start"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
 
