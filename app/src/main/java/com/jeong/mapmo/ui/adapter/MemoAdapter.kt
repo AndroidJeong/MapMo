@@ -11,11 +11,14 @@ import com.jeong.mapmo.data.common.PriorityColor
 import com.jeong.mapmo.data.dto.Memo
 import com.jeong.mapmo.databinding.ItemMemoBinding
 
-class MemoAdapter : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()) {
+class MemoAdapter() : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()) {
 
-    inner class ViewHolder(val binding: ItemMemoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(
+        val binding: ItemMemoBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
         init {
             with(binding) {
+                //중복터치 방지하기 flow binding
                 root.setOnClickListener {
                     currentList[adapterPosition].expand = !currentList[adapterPosition].expand
 
@@ -38,6 +41,13 @@ class MemoAdapter : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()
                         if(cbMemoitemCheckbox.isChecked) Paint.STRIKE_THRU_TEXT_FLAG else 0
                 }
 
+                ivMemoitemEdit.setOnClickListener {
+
+                }
+
+                ivMemoitemErase.setOnClickListener {
+
+                }
             }
         }
 
@@ -101,6 +111,7 @@ class MemoAdapter : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()
         } // 한 아이템 삭제 시 다른 아이템들 모두 스와이프x 상태 처리하기 위함
 
         submitList(newList.toList())
+
     }
 
 

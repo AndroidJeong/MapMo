@@ -2,7 +2,6 @@ package com.jeong.mapmo.di
 
 import android.content.Context
 import androidx.room.Room
-import com.jeong.mapmo.data.db.MemoDatabase
 import kotlin.text.Typography.dagger
 //
 //@InstallIn(SingletonComponent::class)

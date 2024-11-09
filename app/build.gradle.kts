@@ -28,6 +28,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         addManifestPlaceholders(mapOf("NAVERMAP_CLIENT_ID" to properties.getProperty("NAVERMAP_CLIENT_ID")))
+
     }
 
     buildTypes {
@@ -60,15 +61,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Splashscreen
     implementation(libs.androidx.core.splashscreen)
-    
+
     // Lottie
     implementation(libs.lottie)
 
@@ -77,15 +76,17 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     //NaverMap
-    implementation(libs.map.sdk)
-
+    implementation (libs.map.sdk)
     //FusedLocationProviderClient
-    implementation(libs.play.services.location)
-
+    implementation (libs.play.services.location)
     //사용자 위치
-    implementation(libs.play.services.location)
-
-    // Room
+    implementation (libs.play.services.location)
+    //room
     implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
+    //annotationProcessor(libs.room.compiler)
+
+
+
+
 }

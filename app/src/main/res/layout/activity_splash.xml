@@ -10,7 +10,7 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_animation"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zero_dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/iv_splash_logo"
         app:layout_constraintEnd_toEndOf="parent"

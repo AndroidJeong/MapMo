@@ -15,8 +15,6 @@ class MemoMapFragment : BaseFragment<FragmentMemoMapBinding>(FragmentMemoMapBind
     OnMapReadyCallback {
 
     private lateinit var locationSource: FusedLocationSource
-    val exampleLongtitude = 1.1
-    val exampleLatitude = 1.2
 
     override fun initView() {
 
