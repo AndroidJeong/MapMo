@@ -233,4 +233,7 @@ https://navermaps.github.io/maps.js.ncp/docs/tutorial-digest.example.html
 거리계산
 https://velog.io/@fere1032/NaverMap-APIKotlin-%EB%B0%98%EA%B2%BD-%EC%9B%90-%EA%B7%B8%EB%A6%AC%EA%B8%B0-%EC%A2%8C%ED%91%9C-%EA%B1%B0%EB%A6%AC-%EA%B3%84%EC%82%B0
 
+위치 트랙킹 - 거리계산 0 - 알람매니저?
+https://developer.android.com/develop/background-work/background-tasks?hl=ko
+
  */

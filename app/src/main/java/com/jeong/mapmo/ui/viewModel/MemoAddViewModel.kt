@@ -29,4 +29,8 @@ class MemoAddViewModel : ViewModel(){
         ))
     }
 
+    fun deleteMemo(title: String) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteMemo(title)
+    }
+
 }

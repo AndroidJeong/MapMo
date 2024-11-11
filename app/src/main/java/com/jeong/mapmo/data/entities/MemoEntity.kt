@@ -16,6 +16,5 @@ data class MemoEntity (
     var detail: String,
     var priority: PriorityColor = PriorityColor.RED,
     //텍스트 완료처리
-    @ColumnInfo(name = "check")
     var checked: Boolean = false,
     )
