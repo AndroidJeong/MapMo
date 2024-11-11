@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.jeong.mapmo.data.dto.Memo
+import androidx.room.Update
 import com.jeong.mapmo.data.entities.MemoEntity
 
 @Dao
@@ -13,12 +13,15 @@ interface MemoDao {
 
     //get all
     @Query("SELECT * FROM MemoTable")
-    fun getAllTodo() : List<MemoEntity>
+    fun getAllMemo() : MutableList<MemoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTodo(memo: MemoEntity)
+    fun insertMemo(memo: MemoEntity)
 
     @Delete
-    fun deleteTodo(memo: MemoEntity)
+    fun deleteMemo(memo: MemoEntity)
+
+    @Update
+    fun updateMemo(memo: MemoEntity)
 
 }

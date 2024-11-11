@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
-        goToOnboarding()
+       // goToOnboarding()
         initNavHost()
         setBottomNavi()
     }

@@ -29,7 +29,7 @@ abstract class BaseFragment<VB : ViewBinding>(
         super.onViewCreated(view, savedInstanceState)
         initView()
     }
-
+    //
     protected abstract fun initView()
 
     override fun onDestroyView() {

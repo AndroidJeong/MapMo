@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".ui.view.MemoFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -18,18 +17,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/sv_memo"
-                android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_memo"
+                android:layout_width="@dimen/zero_dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toStartOf="@id/iv_memo_toolplus"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconDrawable="@drawable/ic_search_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiet_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/textinput_hint"
+                    android:maxLines="1" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_memo_toolplus"
                 android:layout_width="50dp"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/zero_dp"
                 android:background="@drawable/ic_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_memo_toolarrow"
@@ -38,7 +48,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_memo_toolarrow"
                 android:layout_width="50dp"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/zero_dp"
                 android:background="@drawable/ic_arrow_drop_down_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +66,6 @@
         app:layout_constraintTop_toBottomOf="@id/tb_main"
         tools:itemCount="5"
         tools:listitem="@layout/item_memo" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

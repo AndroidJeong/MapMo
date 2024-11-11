@@ -9,14 +9,13 @@ import com.jeong.mapmo.data.common.PriorityColor
 data class MemoEntity (
     @PrimaryKey(autoGenerate = true)
     var id : Int? = null,
-    //@ColumnInfo(name = "title")
+
     var title: String,
     var longitude: Double = 0.0,
     var latitude: Double = 0.0,
     var detail: String,
     var priority: PriorityColor = PriorityColor.RED,
+    //텍스트 완료처리
+    @ColumnInfo(name = "check")
     var checked: Boolean = false,
-    var expand: Boolean = false,
-    var isClamped: Boolean = false
     )
-//수정? expand, isClamped는 필요없는 부분인데

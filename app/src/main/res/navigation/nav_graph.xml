@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/memoFragment">
-
     <fragment
         android:id="@+id/memoFragment"
         android:name="com.jeong.mapmo.ui.view.MemoFragment"
