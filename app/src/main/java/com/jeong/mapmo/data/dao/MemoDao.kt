@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.jeong.mapmo.data.entities.MemoEntity
 
+
 @Dao
 interface MemoDao {
 
@@ -18,10 +19,13 @@ interface MemoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMemo(memo: MemoEntity)
 
-    @Delete
-    fun deleteMemo(memo: MemoEntity)
+    //Delete
+    @Query("DELETE FROM MemoTable WHERE title = :title")
+    fun deleteMemo(title: String)
 
-    @Update
-    fun updateMemo(memo: MemoEntity)
+    //Update
+    @Query("UPDATE MemoTable SET checked = :checked WHERE title = :title")
+    fun updateMemo(checked: Boolean, title: String)
+
 
 }

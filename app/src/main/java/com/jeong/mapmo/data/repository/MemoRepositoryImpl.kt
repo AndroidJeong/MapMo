@@ -23,21 +23,18 @@ class MemoRepositoryImpl(
         //db.memoDao().insertMemo(memo)
     }
 
-    override fun deleteMemo(memo: MemoEntity) {
-        memoDao.deleteMemo(memo)
+    override fun deleteMemo(title: String) {
+        memoDao.deleteMemo(title)
         //db.memoDao().deleteMemo(memo)
     }
 
-    override fun updateMemo(memo: MemoEntity) {
-        memoDao.updateMemo(memo)
+    override fun updateMemo(checked: Boolean, title: String) {
+        memoDao.updateMemo(checked, title)
         //db.memoDao().updateMemo(memo)
     }
 
     override fun getAllMemo(): Flow<List<MemoEntity>> = flow {
-//        emit(MemoResult.Loading)
-        Log.d("taaag", "dd ${MemoResult.Success(memoDao.getAllMemo())}")
         emit(memoDao.getAllMemo())
-
     }.catch { exception -> exception }
 
 }

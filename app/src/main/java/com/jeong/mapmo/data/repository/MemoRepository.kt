@@ -9,9 +9,9 @@ interface MemoRepository {
     // Room
     fun insertMemo(memo: MemoEntity)
 
-    fun deleteMemo(memo: MemoEntity)
+    fun deleteMemo(title: String)
 
-    fun updateMemo(memo: MemoEntity)
+    fun updateMemo(checked: Boolean, title: String)
 
     fun getAllMemo(): Flow<List<MemoEntity>>
 

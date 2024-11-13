@@ -1,6 +1,18 @@
 package com.jeong.mapmo.data.dto
 
+import android.os.Parcelable
 import com.jeong.mapmo.data.common.PriorityColor
+import kotlinx.parcelize.Parcelize
 
 //수정 상수 수정하기
-data class Memo(var title:String, val longitude:Double = 0.0, val latitude:Double = 0.0, var detail: String, var priority: PriorityColor = PriorityColor.RED, var checked: Boolean = false, var expand: Boolean = false, var isClamped: Boolean = false)
+@Parcelize
+data class Memo(
+    var title:String,
+    val longitude:Double = 0.0,
+    val latitude:Double = 0.0,
+    var detail: String,
+    var priority: PriorityColor = PriorityColor.RED,
+    var checked: Boolean = false,
+    var expand: Boolean = false,
+    var isClamped: Boolean = false
+): Parcelable

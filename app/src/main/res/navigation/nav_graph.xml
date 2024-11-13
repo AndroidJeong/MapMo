@@ -24,8 +24,8 @@
         android:label="fragment_memo_add"
         tools:layout="@layout/fragment_memo_add" >
         <argument
-            android:name="location"
-            app:argType="com.jeong.mapmo.data.dto.Location" />
+            android:name="Memo"
+            app:argType="com.jeong.mapmo.data.dto.Memo" />
     </fragment>
     <fragment
         android:id="@+id/memoMapFragment"

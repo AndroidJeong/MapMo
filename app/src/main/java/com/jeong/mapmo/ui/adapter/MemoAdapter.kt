@@ -11,25 +11,29 @@ import com.jeong.mapmo.data.common.PriorityColor
 import com.jeong.mapmo.data.dto.Memo
 import com.jeong.mapmo.databinding.ItemMemoBinding
 
-class MemoAdapter() : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()) {
+class MemoAdapter(
+    private val deleteFromRoom: (String) -> Unit,
+    private val naviToEdit : (Memo) -> Unit,
+    private val updateMemo: (Boolean, String) -> Unit
+    ) : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo()) {
 
     inner class ViewHolder(
         val binding: ItemMemoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             with(binding) {
-                //중복터치 방지하기 flow binding
+                //수정 중복터치 방지하기 flow binding
                 root.setOnClickListener {
-                    currentList[adapterPosition].expand = !currentList[adapterPosition].expand
+                    currentList[bindingAdapterPosition].expand = !currentList[bindingAdapterPosition].expand
 
                     tvMemoitemDetail.visibility =
-                        if (currentList[adapterPosition].expand) View.VISIBLE else View.GONE
+                        if (currentList[bindingAdapterPosition].expand) View.VISIBLE else View.GONE
 
                     tvMemoitemTitle.maxLines =
-                        if (currentList[adapterPosition].expand) Int.MAX_VALUE else 1
+                        if (currentList[bindingAdapterPosition].expand) Int.MAX_VALUE else 1
 
                     tvMemoitemLocationtext.maxLines =
-                        if (currentList[adapterPosition].expand) Int.MAX_VALUE else 1
+                        if (currentList[bindingAdapterPosition].expand) Int.MAX_VALUE else 1
 
                 }
 
@@ -39,29 +43,26 @@ class MemoAdapter() : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo
 
                     tvMemoitemLocationtext.paintFlags =
                         if(cbMemoitemCheckbox.isChecked) Paint.STRIKE_THRU_TEXT_FLAG else 0
+
+                    updateMemo(cbMemoitemCheckbox.isChecked, currentList[bindingAdapterPosition].title)
+                }
+
+                ivMemoitemDelete.setOnClickListener {
+                    deleteFromRoom(removeItem(bindingAdapterPosition))
                 }
 
                 ivMemoitemEdit.setOnClickListener {
-
-                }
-
-                ivMemoitemErase.setOnClickListener {
-
+                    naviToEdit(currentList[bindingAdapterPosition])
                 }
             }
         }
 
         fun bind(item: Memo) {
-
             // 뷰홀더 재사용 과정에서 isClamped 값에 맞지 않는 스와이프 상태가 보일 수 있으므로 아래와 같이 명시적으로 isClamped 값에 따라 스와이프 상태 지정
             if(item.isClamped) binding.clMemoitemSwipearea.translationX = binding.root.width * -1f / 10 * 3
             else binding.clMemoitemSwipearea.translationX = 0f
 
             with(binding) {
-
-                ivMemoitemErase.setOnClickListener {
-                    if(item.isClamped) removeItem(adapterPosition)
-                }
 
                 ivMemoitemBackground.apply {
                     when (item.priority) {
@@ -70,6 +71,13 @@ class MemoAdapter() : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo
                         PriorityColor.Green -> setImageResource(R.color.green)
                     }
                 }
+
+                if (item.checked){
+                    cbMemoitemCheckbox.isChecked = true
+                    tvMemoitemTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                    tvMemoitemLocationtext.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                }
+
                 tvMemoitemTitle.text = item.title
                 tvMemoitemLocationtext.text = "장소가 들어갈 자리"
                 tvMemoitemDetail.text = item.detail
@@ -78,11 +86,11 @@ class MemoAdapter() : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo
         }
 
         fun setClamped(isClamped: Boolean){
-            getItem(adapterPosition).isClamped = isClamped
+            getItem(bindingAdapterPosition).isClamped = isClamped
         }
 
         fun getClamped(): Boolean{
-            return getItem(adapterPosition).isClamped
+            return getItem(bindingAdapterPosition).isClamped
         }
 
 
@@ -101,9 +109,11 @@ class MemoAdapter() : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo
         }
     }
 
-
-    fun removeItem(position: Int){  // currentList에서 바로 아이템 지우면 에러 발생
+    //질문 뷰모델에 있어야 하나? 어뎁터 관련이니 여기?
+    fun removeItem(position: Int): String {  // currentList에서 바로 아이템 지우면 에러 발생
         val newList = currentList.toMutableList()
+        val title = currentList[position].title
+
         newList.removeAt(position)
 
         newList.forEach {
@@ -112,10 +122,6 @@ class MemoAdapter() : ListAdapter<Memo, MemoAdapter.ViewHolder>(MemoDiffUtilInfo
 
         submitList(newList.toList())
 
+        return title
     }
-
-
-
-
-
 }

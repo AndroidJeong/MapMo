@@ -1,14 +1,18 @@
 package com.jeong.mapmo.ui.view
 
 import android.content.res.ColorStateList
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jeong.mapmo.R
 import com.jeong.mapmo.data.common.PriorityColor
+import com.jeong.mapmo.data.common.toastCommon
 import com.jeong.mapmo.data.dto.Memo
 import com.jeong.mapmo.databinding.FragmentMemoAddBinding
 import com.jeong.mapmo.ui.viewModel.MemoAddViewModel
@@ -22,15 +26,30 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
     override fun initView() {
         setSpinner()
         setAddButton()
+
+        with(binding){
+            etAddTitle.setText(args.Memo.title)
+            etAddDetail.setText(args.Memo.detail)
+            spinnerAdd.setSelection(
+                when(args.Memo.priority){
+                    PriorityColor.YELLOW -> 1
+                    PriorityColor.Green -> 2
+                    else -> 0
+                }
+            )
+        }
+
     }
 
     fun setAddButton() {
         binding.btAddSave.setOnClickListener {
+            toastCommon("저장되었습니다")
+
             with(binding) {
                 val memo = Memo(
                     title = etAddTitle.text.toString(),
-                    longitude = args.location.longitude,
-                    latitude = args.location.latitude,
+                    longitude = args.Memo.longitude,
+                    latitude = args.Memo.latitude,
                     detail = etAddDetail.text.toString(),
                     priority =
                     when (spinnerAdd.selectedItemPosition) {
@@ -40,10 +59,13 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
                         else -> throw IllegalArgumentException("스피너 색상 지정에 문제발생")
                     }
                 )
+                if (!args.Memo.title.isBlank()){
+                    memoAddviewModel.deleteMemo(args.Memo.title)
+                }
 
                 memoAddviewModel.saveMemo(memo)
+                findNavController().popBackStack()
             }
-
         }
     }
 
@@ -90,7 +112,7 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
                 }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+            override fun onNothingSelected(view: AdapterView<*>?) {
             }
 
         }
