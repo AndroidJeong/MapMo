@@ -84,8 +84,8 @@ dependencies {
     //room
     implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
-    //annotationProcessor(libs.room.compiler)
-
+    //work manager
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
 
 
 

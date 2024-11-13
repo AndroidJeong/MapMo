@@ -9,6 +9,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.Constraints
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.jeong.mapmo.R
 import com.jeong.mapmo.databinding.ActivityMainBinding
 import com.jeong.mapmo.ui.view.onboarding.OnboardingActivity
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
        // goToOnboarding()
         initNavHost()
         setBottomNavi()
+
     }
 
     private fun initNavHost() {
@@ -48,4 +52,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, OnboardingActivity::class.java)
         startActivity(intent)
     }
+
+
 }

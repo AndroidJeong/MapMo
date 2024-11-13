@@ -2,6 +2,8 @@ package com.jeong.mapmo.ui.view
 
 import android.util.Log
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +23,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::inflate) {
-    //질문 프레그먼트가 사라져도 어뎁터 객체가 남아있어서 이런식으로 처리하는지
+    //프레그먼트가 사라져도 어뎁터 객체가 남아있을 수 있음 아래 링크 참고
     private var _memoAdaper: MemoAdapter? = null
     val memoAdapter get() = requireNotNull(_memoAdaper)
     private val memoViewModel by viewModels<MemoViewModel>()
@@ -32,6 +34,13 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
         binding.ivMemoToolplus.setOnClickListener {
             findNavController().navigate(R.id.action_memoFragment_to_memoMapFragment)
         }
+
+        //수정 백그라운드 위치 코드 완성시 지우기
+        binding.ivMemoToolarrow.setOnClickListener {
+            findNavController().navigate(R.id.action_memoFragment_to_locationPractice)
+        }
+
+
     }
 
     private fun initMemo() {
@@ -88,3 +97,8 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
         _memoAdaper = null
     }
 }
+/*
+https://velog.io/@lijunhyeong/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%A6%ADmemory-leak
+https://stackoverflow.com/questions/60969041/memory-leaks-in-recyclerview-android
+
+ */
