@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.safeargs)
+    alias(libs.plugins.secrets.gradle.plugin)
 }
 
 android {
@@ -84,9 +85,4 @@ dependencies {
     //room
     implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
-    //annotationProcessor(libs.room.compiler)
-
-
-
-
 }
