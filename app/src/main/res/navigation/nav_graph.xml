@@ -12,9 +12,6 @@
         <action
             android:id="@+id/action_memoFragment_to_memoMapFragment"
             app:destination="@id/memoMapFragment" />
-        <action
-            android:id="@+id/action_memoFragment_to_locationPractice"
-            app:destination="@id/locationPractice" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
@@ -39,10 +36,5 @@
             android:id="@+id/action_memoMapFragment_to_memoAddFragment"
             app:destination="@id/memoAddFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/locationPractice"
-        android:name="com.jeong.mapmo.ui.view.LocationPractice"
-        android:label="fragment_location_practice"
-        tools:layout="@layout/fragment_location_practice" />
 
 </navigation>

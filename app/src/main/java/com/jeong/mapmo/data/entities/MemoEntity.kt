@@ -14,6 +14,7 @@ data class MemoEntity (
     var longitude: Double = 0.0,
     var latitude: Double = 0.0,
     var detail: String,
+    var locationName: String = "",
     var priority: PriorityColor = PriorityColor.RED,
     //텍스트 완료처리
     var checked: Boolean = false,

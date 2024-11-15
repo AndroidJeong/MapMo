@@ -3,7 +3,6 @@ package com.jeong.mapmo.ui.view
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -11,9 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.work.Constraints
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.jeong.mapmo.R
 import com.jeong.mapmo.data.common.LocationService
 import com.jeong.mapmo.databinding.ActivityMainBinding

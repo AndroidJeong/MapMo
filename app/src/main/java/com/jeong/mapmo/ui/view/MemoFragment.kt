@@ -3,8 +3,6 @@ package com.jeong.mapmo.ui.view
 import android.content.Intent
 import android.util.Log
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -37,14 +35,10 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
             findNavController().navigate(R.id.action_memoFragment_to_memoMapFragment)
         }
 
-        //수정 백그라운드 위치 코드 완성시 지우기
-        binding.ivMemoToolarrow.setOnClickListener {
-            findNavController().navigate(R.id.action_memoFragment_to_locationPractice)
-        }
-
-        binding.ivMemoToolarrow.setOnClickListener {
+        binding.ivMemoSetting.setOnClickListener {
             val serviceIntent = Intent(requireActivity(), LocationService::class.java)
             requireActivity().stopService(serviceIntent)
+            toastCommon("알림을 종료합니다. 알림을 다시 시작하려면 앱을 다시 실행해주세요")
             Log.d("location2", "서비스 종료")
         }
 
@@ -90,14 +84,6 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
         }
 
     }
-
-    //질문 체크박스 누를때마다 룸 업데이트?
-    override fun onPause() {
-        super.onPause()
-       // memoViewModel.updateMemo()
-    }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

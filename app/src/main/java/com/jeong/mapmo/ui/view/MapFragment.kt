@@ -3,13 +3,7 @@ package com.jeong.mapmo.ui.view
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.location.Location
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -20,8 +14,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.jeong.mapmo.R
 import com.jeong.mapmo.databinding.FragmentMapBinding
-import com.jeong.mapmo.databinding.FragmentMemoBinding
-import com.jeong.mapmo.ui.adapter.MemoAdapter
 import com.jeong.mapmo.util.BaseFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate

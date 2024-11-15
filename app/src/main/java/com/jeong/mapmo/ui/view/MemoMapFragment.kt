@@ -1,10 +1,7 @@
 package com.jeong.mapmo.ui.view
 
 import android.os.Build
-import android.util.Log
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.jeong.mapmo.R
 import com.jeong.mapmo.data.common.PriorityColor
 import com.jeong.mapmo.data.dto.Memo
@@ -32,8 +29,8 @@ class MemoMapFragment : BaseFragment<FragmentMemoMapBinding>(FragmentMemoMapBind
         initMapView()
 
         binding.fbMapLocationButton.setOnClickListener {
-            //수정!! 위도 경도 받아와서 수정 , 37.4701, 126.8973382
-            var memo  = Memo("",126.8973382, 37.4701, "", PriorityColor.RED, false, false, false)
+            //수정!! 위도 경도 받아와서 수정, api를 통한 지역이름 넣어주기
+            var memo  = Memo("",126.8973382, 37.4701, "", PriorityColor.RED, "",false, false, false)
             if (editData != null) {
               memo = editData
             }

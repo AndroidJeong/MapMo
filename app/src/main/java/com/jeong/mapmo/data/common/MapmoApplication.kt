@@ -1,6 +1,7 @@
 package com.jeong.mapmo.data.common
 
 import android.app.Application
+import android.content.Intent
 import android.util.Log
 import androidx.work.Constraints
 import androidx.work.OneTimeWorkRequestBuilder
@@ -18,7 +19,8 @@ class MapmoApplication: Application() {
         super.onCreate()
         application = this
         Log.d("location", "application onCreate")
-
+        val serviceIntent = Intent(applicationContext, LocationService::class.java)
+        applicationContext.stopService(serviceIntent)
         //workExample()
     }
 
