@@ -13,6 +13,7 @@ class KakaoRepositoryImpl(
         return response.documents.map {
             Place(
                 name = it.place_name,
+                address = it.road_address_name,
                 latitude = it.y.toDouble(),
                 longitude = it.x.toDouble()
             )
