@@ -32,8 +32,8 @@ class MemoMapFragment : BaseFragment<FragmentMemoMapBinding>(FragmentMemoMapBind
         initMapView()
 
         binding.fbMapLocationButton.setOnClickListener {
-            //수정!! 위도 경도 받아와서 수정
-            var memo  = Memo("", 0.0, 0.0, "", PriorityColor.RED, false, false, false)
+            //수정!! 위도 경도 받아와서 수정 , 37.4701, 126.8973382
+            var memo  = Memo("",126.8973382, 37.4701, "", PriorityColor.RED, false, false, false)
             if (editData != null) {
               memo = editData
             }

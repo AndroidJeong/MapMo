@@ -1,5 +1,6 @@
 package com.jeong.mapmo.ui.view
 
+import android.content.Intent
 import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeong.mapmo.R
+import com.jeong.mapmo.data.common.LocationService
 import com.jeong.mapmo.data.common.MemoResult
 import com.jeong.mapmo.data.common.toastCommon
 import com.jeong.mapmo.databinding.FragmentMemoBinding
@@ -40,6 +42,11 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
             findNavController().navigate(R.id.action_memoFragment_to_locationPractice)
         }
 
+        binding.ivMemoToolarrow.setOnClickListener {
+            val serviceIntent = Intent(requireActivity(), LocationService::class.java)
+            requireActivity().stopService(serviceIntent)
+            Log.d("location2", "서비스 종료")
+        }
 
     }
 

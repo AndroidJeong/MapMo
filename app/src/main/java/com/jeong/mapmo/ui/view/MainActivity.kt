@@ -1,7 +1,9 @@
 package com.jeong.mapmo.ui.view
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -13,6 +15,7 @@ import androidx.work.Constraints
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.jeong.mapmo.R
+import com.jeong.mapmo.data.common.LocationService
 import com.jeong.mapmo.databinding.ActivityMainBinding
 import com.jeong.mapmo.ui.view.onboarding.OnboardingActivity
 
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity() {
        // goToOnboarding()
         initNavHost()
         setBottomNavi()
+        executeService()
 
     }
 
@@ -52,6 +56,24 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, OnboardingActivity::class.java)
         startActivity(intent)
     }
+
+    private lateinit var serviceIntent: Intent
+    private fun executeService() {
+        if (!this::serviceIntent.isInitialized) {
+            serviceIntent = Intent(this@MainActivity, LocationService::class.java)
+        }
+            with(serviceIntent) {
+                putExtra("메모한 위치", "위치")
+                //Android Oreo 부터는 다음과 같이 호출 한다
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(this)
+                } else {
+                    startService(this)
+                }
+            }
+    }
+
+
 
 
 }

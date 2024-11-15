@@ -5,4 +5,7 @@ object Constants {
     const val API_KEY = ""
 
     const val ONBOARDING_OBJECT = "ONBOARDING_OBJECT"
+    const val CHANNEL_ID = "CHANNEL_ID"
+    const val CHANNEL_NAME = "CHANNEL_NAME"
+
 }

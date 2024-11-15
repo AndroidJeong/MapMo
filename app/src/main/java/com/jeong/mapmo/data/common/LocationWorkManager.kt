@@ -1,13 +1,19 @@
 package com.jeong.mapmo.data.common
 
 import android.Manifest
+import android.app.Notification
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.work.CoroutineWorker
 import androidx.work.Data
+import androidx.work.ForegroundInfo
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -20,20 +26,20 @@ import com.google.android.gms.location.Priority
 import com.jeong.mapmo.data.dto.LocationInfo
 
 class LocationWorkManager(appContext: Context, workerParams: WorkerParameters) :
-    Worker(appContext, workerParams) {
+    CoroutineWorker(appContext, workerParams) {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var currentLocation: LocationInfo = LocationInfo(0.0, 0.0)
 
 
 
+    override suspend fun doWork(): Result {
 
-
-
-
-    override fun doWork(): Result {
-        val id = id
         Log.d("location", "워크매니저 시작")
+
+        //val foregroundInfo = ForegroundInfo(1, createNotification())
+        //setForegroundAsync(foregroundInfo)
+
 
         return if (getLocation(applicationContext)) {
             Log.d("location", "return if: $currentLocation")
@@ -42,6 +48,11 @@ class LocationWorkManager(appContext: Context, workerParams: WorkerParameters) :
             val outPutData = Data.Builder()
                 .putInt("location", 1)
                 .build()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                val workRequest = OneTimeWorkRequestBuilder<LocationWorkManager>().build()
+                WorkManager.getInstance(applicationContext).enqueue(workRequest)
+            }, 5 * 60 * 1000)
 
             Result.success(outPutData)
         } else {
@@ -52,7 +63,7 @@ class LocationWorkManager(appContext: Context, workerParams: WorkerParameters) :
 
     fun getLocation(context: Context): Boolean {
 
-        while (!Thread.currentThread().isInterrupted) {
+       // while (!Thread.currentThread().isInterrupted) {
 
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 
@@ -101,20 +112,24 @@ class LocationWorkManager(appContext: Context, workerParams: WorkerParameters) :
                 //return false
             } else {
                 Log.d("location", "권한 문제로 받아올 수 없음")
-                Thread.currentThread().interrupt()
+               //Thread.currentThread().interrupt()
                 return false
             }
             //수정 테스트 모두 끝나면 시간 조정하기
-            Thread.sleep(5 * 60 * 1000)
-        }
+            //Thread.sleep(5 * 60 * 1000)
+      //  }
 
         return true
     }
 
+
+
 }
-/*질문
-설정같은걸 만들어서 멈춰야하는지
+/*
 작업이 쌓이는 문제(10분)
+-> 이유알기 thread sleep?
+
+sleep 안주면 계속 실행, 주면 새로운 객체 생성?
  */
 
 
@@ -128,5 +143,9 @@ https://developer.android.com/develop/background-work/background-tasks/persisten
 워크매니저 vs 서비스
 https://android-developer.tistory.com/16
 https://velog.io/@uuranus/Android-WorkManager
+
+
+https://developer.android.com/develop/background-work/background-tasks/persistent/getting-started/define-work?hl=ko#work-constraints
+https://developer.android.com/develop/background-work/background-tasks/persistent/threading/coroutineworker?hl=ko
 
  */
