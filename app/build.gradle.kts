@@ -78,11 +78,18 @@ dependencies {
 
     //NaverMap
     implementation (libs.map.sdk)
+
     //FusedLocationProviderClient
     implementation (libs.play.services.location)
+
     //사용자 위치
     implementation (libs.play.services.location)
+
     //room
     implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
 }
