@@ -38,6 +38,10 @@ class MapViewModel(
         searchQuery.value = query
     }
 
+    fun clearPlaces() {
+        _places.value = emptyList()
+    }
+
     private fun searchPlaces(query: String) {
         if (query.isBlank()) return
 

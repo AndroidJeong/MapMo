@@ -29,7 +29,7 @@
         android:id="@+id/searchResultsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/search_bar"
         app:layout_constraintStart_toStartOf="@id/search_bar"
         app:layout_constraintTop_toBottomOf="@id/search_bar" />

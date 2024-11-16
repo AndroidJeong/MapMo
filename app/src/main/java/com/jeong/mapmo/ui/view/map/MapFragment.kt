@@ -93,6 +93,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
                     viewModel.setSearchQuery(it)
+                    binding.searchResultsRecyclerView.visibility = View.GONE
                 }
                 hideKeyboard()
                 return false
@@ -100,6 +101,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
+                    if (it.isBlank()) binding.searchResultsRecyclerView.visibility = View.GONE
                     viewModel.setSearchQuery(it)
                 }
                 return false
@@ -204,9 +206,17 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        naverMap = null
+    override fun onPause() {
+        super.onPause()
+        resetSearchState()
+    }
+
+    private fun resetSearchState() {
+        binding.searchResultsRecyclerView.visibility = View.GONE
+        binding.searchBar.setQuery("", false)
+        binding.searchBar.clearFocus()
+        searchAdapter.submitList(emptyList())
+        viewModel.clearPlaces()
     }
 
     companion object {
