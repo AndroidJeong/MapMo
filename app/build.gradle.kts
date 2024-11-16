@@ -92,4 +92,7 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+
+    // LiveData
+    implementation(libs.lifecycle.livedata.ktx)
 }

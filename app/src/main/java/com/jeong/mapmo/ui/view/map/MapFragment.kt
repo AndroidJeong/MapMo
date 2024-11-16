@@ -86,13 +86,17 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     private fun setupSearchView() {
         binding.searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { viewModel.searchPlaces(it) }
+                query?.let {
+                    viewModel.setSearchQuery(it)
+                }
                 hideKeyboard()
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { viewModel.searchPlaces(it) }
+                newText?.let {
+                    viewModel.setSearchQuery(it)
+                }
                 return false
             }
         })
