@@ -46,8 +46,8 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         MapViewModelFactory(useCase)
     }
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var naverMap: NaverMap
     private val markers = mutableListOf<Marker>()
+    private var naverMap: NaverMap? = null
     private var locationCircle: CircleOverlay? = null
     private val searchAdapter by lazy { SearchResultAdapter() }
 
@@ -69,11 +69,16 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             adapter = searchAdapter
             addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
         }
-        searchAdapter.onItemClick = { place ->
-            val cameraUpdate = CameraUpdate.scrollTo(LatLng(place.latitude, place.longitude))
-            naverMap.moveCamera(cameraUpdate)
-            binding.searchResultsRecyclerView.visibility = View.GONE
 
+        searchAdapter.onItemClick = { place ->
+            val map = naverMap
+            if (map != null) {
+                val cameraUpdate = CameraUpdate.scrollTo(LatLng(place.latitude, place.longitude))
+                map.moveCamera(cameraUpdate)
+                binding.searchResultsRecyclerView.visibility = View.GONE
+            } else {
+                Toast.makeText(requireContext(), "지도가 초기화되지 않았습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -120,13 +125,17 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
     }
 
     override fun onMapReady(map: NaverMap) {
-        naverMap = map
-        naverMap.uiSettings.isLocationButtonEnabled = true
-        naverMap.locationTrackingMode = LocationTrackingMode.Follow
+        naverMap = map.apply {
+            uiSettings.isLocationButtonEnabled = true
+            locationTrackingMode = LocationTrackingMode.Follow
+        }
+
         moveToUserLocation()
     }
 
     private fun moveToUserLocation() {
+        val map = naverMap ?: return
+
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -145,7 +154,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 val userLatLng = LatLng(it.latitude, it.longitude)
                 updateUserLocationCircle(userLatLng)
                 val cameraUpdate = CameraUpdate.scrollAndZoomTo(userLatLng, 16.0)
-                naverMap.moveCamera(cameraUpdate)
+                map.moveCamera(cameraUpdate)
             }
         }
     }
@@ -193,6 +202,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        naverMap = null
     }
 
     companion object {
