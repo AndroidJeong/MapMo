@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.safeargs)
+    alias(libs.plugins.secrets.gradle.plugin)
 }
 
 android {
@@ -77,16 +78,21 @@ dependencies {
 
     //NaverMap
     implementation (libs.map.sdk)
+
     //FusedLocationProviderClient
     implementation (libs.play.services.location)
+
     //사용자 위치
     implementation (libs.play.services.location)
+
     //room
     implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
-    //annotationProcessor(libs.room.compiler)
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
 
-
-
+    // LiveData
+    implementation(libs.lifecycle.livedata.ktx)
 }

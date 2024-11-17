@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.jeong.mapmo.ui.view.MapFragment"
+        android:name="com.jeong.mapmo.ui.view.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
     <fragment
