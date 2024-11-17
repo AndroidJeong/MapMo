@@ -34,6 +34,7 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.CircleOverlay
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
@@ -46,6 +47,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         MapViewModelFactory(useCase)
     }
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationSource: FusedLocationSource
     private val markers = mutableListOf<Marker>()
     private var naverMap: NaverMap? = null
     private var locationCircle: CircleOverlay? = null
@@ -124,10 +126,12 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 childFragmentManager.beginTransaction().add(R.id.container_map, it).commit()
             }
         mapFragment.getMapAsync(this)
+        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
     }
 
     override fun onMapReady(map: NaverMap) {
         naverMap = map.apply {
+            locationSource = this@MapFragment.locationSource
             uiSettings.isLocationButtonEnabled = true
             locationTrackingMode = LocationTrackingMode.Follow
         }
@@ -152,11 +156,21 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            location?.let {
-                val userLatLng = LatLng(it.latitude, it.longitude)
-                updateUserLocationCircle(userLatLng)
-                val cameraUpdate = CameraUpdate.scrollAndZoomTo(userLatLng, 16.0)
-                map.moveCamera(cameraUpdate)
+            if (location != null) {
+                val userLatLng = LatLng(location.latitude, location.longitude)
+
+                map.locationOverlay.apply {
+                    isVisible = true
+                    position = userLatLng
+                }
+
+                location.let {
+                    updateUserLocationCircle(userLatLng)
+                    val cameraUpdate = CameraUpdate.scrollAndZoomTo(userLatLng, 17.0)
+                    map.moveCamera(cameraUpdate)
+                }
+            } else {
+                Toast.makeText(requireContext(), "현재 위치를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
