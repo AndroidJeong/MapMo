@@ -33,12 +33,12 @@ class MemoMapFragment : BaseFragment<FragmentMemoMapBinding>(FragmentMemoMapBind
 
         binding.fbMapLocationButton.setOnClickListener {
             //수정!! 위도 경도 받아와서 수정
-            var memo  = Memo("", 0.0, 0.0, "", PriorityColor.RED, false, false, false)
-            if (editData != null) {
-              memo = editData
-            }
-            val action = MemoMapFragmentDirections.actionMemoMapFragmentToMemoAddFragment(memo)
-            findNavController().navigate(action)
+            // var memo  = Memo("", 0.0, 0.0, "", PriorityColor.RED, false, false, false)
+            // if (editData != null) {
+            //   memo = editData
+            // }
+            // val action = MemoMapFragmentDirections.actionMemoMapFragmentToMemoAddFragment(memo)
+            // findNavController().navigate(action)
 
         }
     }

@@ -10,14 +10,18 @@
         android:label="fragment_memo"
         tools:layout="@layout/fragment_memo">
         <action
-            android:id="@+id/action_memoFragment_to_memoMapFragment"
-            app:destination="@id/memoMapFragment" />
+            android:id="@+id/action_memoFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.jeong.mapmo.ui.view.map.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_memoAddFragment"
+            app:destination="@id/memoAddFragment" />
+    </fragment>
     <fragment
         android:id="@+id/memoAddFragment"
         android:name="com.jeong.mapmo.ui.view.MemoAddFragment"
@@ -27,14 +31,4 @@
             android:name="Memo"
             app:argType="com.jeong.mapmo.data.dto.Memo" />
     </fragment>
-    <fragment
-        android:id="@+id/memoMapFragment"
-        android:name="com.jeong.mapmo.ui.view.MemoMapFragment"
-        android:label="fragment_memo_map"
-        tools:layout="@layout/fragment_memo_map">
-        <action
-            android:id="@+id/action_memoMapFragment_to_memoAddFragment"
-            app:destination="@id/memoAddFragment" />
-    </fragment>
-
 </navigation>

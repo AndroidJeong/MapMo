@@ -1,13 +1,11 @@
 package com.jeong.mapmo.ui.view
 
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jeong.mapmo.R
@@ -27,18 +25,17 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
         setSpinner()
         setAddButton()
 
-        with(binding){
+        with(binding) {
             etAddTitle.setText(args.Memo.title)
             etAddDetail.setText(args.Memo.detail)
             spinnerAdd.setSelection(
-                when(args.Memo.priority){
+                when (args.Memo.priority) {
                     PriorityColor.YELLOW -> 1
                     PriorityColor.Green -> 2
                     else -> 0
                 }
             )
         }
-
     }
 
     fun setAddButton() {
@@ -48,6 +45,7 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
             with(binding) {
                 val memo = Memo(
                     title = etAddTitle.text.toString(),
+                    location = args.Memo.location,
                     longitude = args.Memo.longitude,
                     latitude = args.Memo.latitude,
                     detail = etAddDetail.text.toString(),
@@ -59,7 +57,7 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
                         else -> throw IllegalArgumentException("스피너 색상 지정에 문제발생")
                     }
                 )
-                if (!args.Memo.title.isBlank()){
+                if (args.Memo.title.isNotBlank()) {
                     memoAddviewModel.deleteMemo(args.Memo.title)
                 }
 
@@ -73,7 +71,11 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
         val datas = resources.getStringArray(R.array.spinner_list)
         val spinner = binding.spinnerAdd
         val spinnerAdapter =
-            ArrayAdapter<String>(requireActivity(), android.R.layout.simple_dropdown_item_1line, datas)
+            ArrayAdapter(
+                requireActivity(),
+                android.R.layout.simple_dropdown_item_1line,
+                datas
+            )
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = spinnerAdapter
 
@@ -114,9 +116,6 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
 
             override fun onNothingSelected(view: AdapterView<*>?) {
             }
-
         }
-
     }
-
 }
