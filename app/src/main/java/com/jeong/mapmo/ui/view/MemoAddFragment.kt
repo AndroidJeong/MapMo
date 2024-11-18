@@ -13,6 +13,7 @@ import com.jeong.mapmo.data.common.PriorityColor
 import com.jeong.mapmo.data.common.toastCommon
 import com.jeong.mapmo.data.dto.Memo
 import com.jeong.mapmo.databinding.FragmentMemoAddBinding
+import com.jeong.mapmo.ui.view.map.MapViewModel
 import com.jeong.mapmo.ui.viewModel.MemoAddViewModel
 import com.jeong.mapmo.util.BaseFragment
 
@@ -27,6 +28,7 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
 
         with(binding) {
             etAddTitle.setText(args.Memo.title)
+            tvAddLocation.text = args.Memo.location
             etAddDetail.setText(args.Memo.detail)
             spinnerAdd.setSelection(
                 when (args.Memo.priority) {
@@ -45,7 +47,7 @@ class MemoAddFragment : BaseFragment<FragmentMemoAddBinding>(FragmentMemoAddBind
             with(binding) {
                 val memo = Memo(
                     title = etAddTitle.text.toString(),
-                    location = args.Memo.location,
+                    location = tvAddLocation.text.toString(),
                     longitude = args.Memo.longitude,
                     latitude = args.Memo.latitude,
                     detail = etAddDetail.text.toString(),

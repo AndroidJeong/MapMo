@@ -79,7 +79,7 @@ class MemoAdapter(
                 }
 
                 tvMemoitemTitle.text = item.title
-                tvMemoitemLocationtext.text = "장소가 들어갈 자리"
+                tvMemoitemLocationtext.text = item.location
                 tvMemoitemDetail.text = item.detail
 
             }

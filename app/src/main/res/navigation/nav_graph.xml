@@ -17,7 +17,7 @@
         android:id="@+id/mapFragment"
         android:name="com.jeong.mapmo.ui.view.map.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" >
+        tools:layout="@layout/fragment_map">
         <action
             android:id="@+id/action_mapFragment_to_memoAddFragment"
             app:destination="@id/memoAddFragment" />
@@ -26,7 +26,7 @@
         android:id="@+id/memoAddFragment"
         android:name="com.jeong.mapmo.ui.view.MemoAddFragment"
         android:label="fragment_memo_add"
-        tools:layout="@layout/fragment_memo_add" >
+        tools:layout="@layout/fragment_memo_add">
         <argument
             android:name="Memo"
             app:argType="com.jeong.mapmo.data.dto.Memo" />

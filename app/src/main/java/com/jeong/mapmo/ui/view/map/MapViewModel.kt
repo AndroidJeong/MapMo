@@ -7,6 +7,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.jeong.mapmo.domain.model.Place
 import com.jeong.mapmo.domain.usecase.SearchPlacesUseCase
+import com.naver.maps.geometry.LatLng
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -21,6 +22,12 @@ class MapViewModel(
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
+
+    private val _fabVisible = MutableLiveData<Boolean>(false)
+    val fabVisible: LiveData<Boolean> get() = _fabVisible
+
+    private val _selectedMarkerName = MutableLiveData<String?>()
+    val selectedMarkerName: LiveData<String?> get() = _selectedMarkerName
 
     private val searchQuery = MutableLiveData<String>()
 
@@ -53,5 +60,15 @@ class MapViewModel(
                 _error.value = "Failed to load places: ${e.message}"
             }
         }
+    }
+
+    fun onMarkerClicked(markerName: String) {
+        _selectedMarkerName.value = markerName
+        _fabVisible.value = true
+    }
+
+    // FAB 클릭 이벤트
+    fun onFabClicked() {
+        _fabVisible.value = false
     }
 }

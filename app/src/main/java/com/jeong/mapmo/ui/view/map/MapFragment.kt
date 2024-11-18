@@ -12,11 +12,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.jeong.mapmo.R
+import com.jeong.mapmo.data.common.PriorityColor
+import com.jeong.mapmo.data.dto.Memo
 import com.jeong.mapmo.data.remote.KakaoSearchService
 import com.jeong.mapmo.data.remote.RetrofitClient
 import com.jeong.mapmo.data.repository.KakaoRepositoryImpl
@@ -63,6 +66,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         setupRecyclerView()
         setupSearchView()
         setupMapFragment()
+        setupFab()
     }
 
     private fun setupRecyclerView() {
@@ -199,7 +203,14 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 icon = MarkerIcons.BLACK
                 iconTintColor = ContextCompat.getColor(requireContext(), R.color.yellow)
                 captionText = place.name
+                captionTextSize = 16f
                 map = naverMap
+                setOnClickListener {
+                    viewModel.onMarkerClicked(markerName = place.name)
+                    hideKeyboard()
+                    Toast.makeText(requireContext(), "메모를 작성해주세요.", Toast.LENGTH_SHORT).show()
+                    true
+                }
             }
             markers.add(marker)
         }
@@ -210,6 +221,25 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         markers.clear()
     }
 
+    private fun setupFab() {
+        binding.fabMemoAdd.setOnClickListener {
+            viewModel.onFabClicked()
+            val memo = Memo(
+                "",
+                viewModel.selectedMarkerName.value.toString(),
+                0.0,
+                0.0,
+                "",
+                PriorityColor.RED,
+                false,
+                false,
+                false
+            )
+            val action = MapFragmentDirections.actionMapFragmentToMemoAddFragment(memo)
+            findNavController().navigate(action)
+        }
+    }
+
     private fun observeViewModel() {
         viewModel.places.observe(viewLifecycleOwner) { places ->
             displayMarkers(places)
@@ -217,6 +247,10 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
             Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.fabVisible.observe(viewLifecycleOwner) {
+            binding.fabMemoAdd.visibility = if (it) View.VISIBLE else View.GONE
         }
     }
 
