@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jeong.mapmo.data.common.MemoResult
 import com.jeong.mapmo.data.dto.Memo
-import com.jeong.mapmo.data.entities.MemoEntity
 import com.jeong.mapmo.data.repository.MemoRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,13 +44,14 @@ class MemoViewModel : ViewModel() {
                 .catch {
                     _memoList.emit(MemoResult.RoomDBError(it))
                 }
-                .collectLatest {
+                .collectLatest { it ->
                     if (it.isNotEmpty()) {
                         _memoList.emit(
                             MemoResult.Success(
                                 it.map {
                                     Memo(
                                         title = it.title,
+                                        location = it.location,
                                         longitude = it.longitude,
                                         latitude = it.latitude,
                                         detail = it.detail,
