@@ -21,6 +21,7 @@ class MemoAddViewModel : ViewModel(){
     fun saveMemo(memo: Memo) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertMemo(MemoEntity(
             title = memo.title,
+            location = memo.location,
             longitude = memo.longitude,
             latitude = memo.latitude,
             detail = memo.detail,

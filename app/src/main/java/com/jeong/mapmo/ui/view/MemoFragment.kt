@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeong.mapmo.R
 import com.jeong.mapmo.data.common.LocationService
 import com.jeong.mapmo.data.common.MemoResult
-import com.jeong.mapmo.data.common.toastCommon
 import com.jeong.mapmo.databinding.FragmentMemoBinding
 import com.jeong.mapmo.ui.adapter.MemoAdapter
 import com.jeong.mapmo.ui.adapter.SwipeHelper
@@ -32,7 +31,7 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
         initRecyclerView()
         initMemo()
         binding.ivMemoToolplus.setOnClickListener {
-            findNavController().navigate(R.id.action_memoFragment_to_memoMapFragment)
+            findNavController().navigate(R.id.action_memoFragment_to_mapFragment)
         }
 
         binding.ivMemoSetting.setOnClickListener {
@@ -49,7 +48,7 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 memoViewModel.memoList.collectLatest {
-                    when(it){
+                    when (it) {
                         is MemoResult.Loading -> {}
                         is MemoResult.NoConstructor -> {}
                         is MemoResult.RoomDBError -> Log.d("room error", it.toString())
@@ -69,9 +68,9 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
             deleteFromRoom = { title ->
                 memoViewModel.deleteMemo(title)
             },
-            naviToEdit =  { memo ->
+            naviToEdit = { memo ->
                 findNavController().navigate(
-                R.id.action_memoFragment_to_memoMapFragment, bundleOf("editData" to memo)
+                    R.id.action_memoFragment_to_mapFragment, bundleOf("editData" to memo)
                 )
             },
             updateMemo = { checked, title ->

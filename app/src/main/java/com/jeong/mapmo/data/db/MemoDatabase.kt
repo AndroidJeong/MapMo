@@ -25,7 +25,7 @@ import com.jeong.mapmo.data.entities.MemoEntity
 //    abstract fun memoDao(): MemoDao
 //}
 
-@Database(entities = arrayOf(MemoEntity::class), version = 1)
+@Database(entities = [MemoEntity::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getTodoDao() : MemoDao

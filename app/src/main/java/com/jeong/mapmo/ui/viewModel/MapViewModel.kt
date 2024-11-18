@@ -8,6 +8,6 @@ import kotlinx.coroutines.launch
 
 class MapViewModel () : ViewModel() {
 
-    //룸에서 가져와서 지도에 마커표시
+
 
 }
