@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.safeargs)
+    alias(libs.plugins.secrets.gradle.plugin)
 }
 
 android {
@@ -87,6 +88,10 @@ dependencies {
     //work manager
     implementation ("androidx.work:work-runtime-ktx:2.8.1")
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
 
-
+    // LiveData
+    implementation(libs.lifecycle.livedata.ktx)
 }

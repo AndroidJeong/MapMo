@@ -3,7 +3,13 @@ package com.jeong.mapmo.ui.view
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.location.Location
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -14,6 +20,8 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.jeong.mapmo.R
 import com.jeong.mapmo.databinding.FragmentMapBinding
+import com.jeong.mapmo.databinding.FragmentMemoBinding
+import com.jeong.mapmo.ui.adapter.MemoAdapter
 import com.jeong.mapmo.util.BaseFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -218,5 +226,14 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 /*
 https://velog.io/@nahy-512/AndroidKotlin-naverMap2
 https://navermaps.github.io/maps.js.ncp/docs/tutorial-digest.example.html
+
+실시간
+좌표
+
+거리계산
+https://velog.io/@fere1032/NaverMap-APIKotlin-%EB%B0%98%EA%B2%BD-%EC%9B%90-%EA%B7%B8%EB%A6%AC%EA%B8%B0-%EC%A2%8C%ED%91%9C-%EA%B1%B0%EB%A6%AC-%EA%B3%84%EC%82%B0
+
+위치 트랙킹 - 거리계산 0 - 알람매니저?
+https://developer.android.com/develop/background-work/background-tasks?hl=ko
 
  */
