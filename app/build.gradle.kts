@@ -78,16 +78,15 @@ dependencies {
 
     //NaverMap
     implementation (libs.map.sdk)
-
     //FusedLocationProviderClient
     implementation (libs.play.services.location)
-
     //사용자 위치
     implementation (libs.play.services.location)
-
     //room
     implementation(libs.androidx.room.runtime)
     ksp(libs.room.compiler)
+    //work manager
+    implementation ("androidx.work:work-runtime-ktx:2.8.1")
 
     // Retrofit
     implementation(libs.retrofit)
@@ -95,4 +94,6 @@ dependencies {
 
     // LiveData
     implementation(libs.lifecycle.livedata.ktx)
+
+
 }

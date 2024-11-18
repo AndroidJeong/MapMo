@@ -55,6 +55,7 @@ class MemoViewModel : ViewModel() {
                                         longitude = it.longitude,
                                         latitude = it.latitude,
                                         detail = it.detail,
+                                        locationName = it.locationName,
                                         priority = it.priority,
                                         checked = it.checked
                                     )
@@ -65,4 +66,14 @@ class MemoViewModel : ViewModel() {
 
         }
     }
+
+
+    fun searchMemo(title: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            //memoList.value
+
+        }
+    }
+
+
 }

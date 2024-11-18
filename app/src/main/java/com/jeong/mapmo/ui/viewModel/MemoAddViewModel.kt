@@ -25,6 +25,7 @@ class MemoAddViewModel : ViewModel(){
             longitude = memo.longitude,
             latitude = memo.latitude,
             detail = memo.detail,
+            locationName = memo.locationName,
             priority = memo.priority,
             checked = memo.checked
         ))

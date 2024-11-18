@@ -1,5 +1,6 @@
 package com.jeong.mapmo.ui.view
 
+import android.content.Intent
 import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -10,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeong.mapmo.R
+import com.jeong.mapmo.data.common.LocationService
 import com.jeong.mapmo.data.common.MemoResult
+import com.jeong.mapmo.data.common.toastCommon
 import com.jeong.mapmo.databinding.FragmentMemoBinding
 import com.jeong.mapmo.ui.adapter.MemoAdapter
 import com.jeong.mapmo.ui.adapter.SwipeHelper
@@ -20,7 +23,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::inflate) {
-    //질문 프레그먼트가 사라져도 어뎁터 객체가 남아있어서 이런식으로 처리하는지
+    //프레그먼트가 사라져도 어뎁터 객체가 남아있을 수 있음 아래 링크 참고
     private var _memoAdaper: MemoAdapter? = null
     val memoAdapter get() = requireNotNull(_memoAdaper)
     private val memoViewModel by viewModels<MemoViewModel>()
@@ -31,6 +34,14 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
         binding.ivMemoToolplus.setOnClickListener {
             findNavController().navigate(R.id.action_memoFragment_to_mapFragment)
         }
+
+        binding.ivMemoSetting.setOnClickListener {
+            val serviceIntent = Intent(requireActivity(), LocationService::class.java)
+            requireActivity().stopService(serviceIntent)
+            toastCommon("알림을 종료합니다. 알림을 다시 시작하려면 앱을 다시 실행해주세요")
+            Log.d("location2", "서비스 종료")
+        }
+
     }
 
     private fun initMemo() {
@@ -79,3 +90,8 @@ class MemoFragment : BaseFragment<FragmentMemoBinding>(FragmentMemoBinding::infl
         _memoAdaper = null
     }
 }
+/*
+https://velog.io/@lijunhyeong/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EB%A6%ADmemory-leak
+https://stackoverflow.com/questions/60969041/memory-leaks-in-recyclerview-android
+
+ */

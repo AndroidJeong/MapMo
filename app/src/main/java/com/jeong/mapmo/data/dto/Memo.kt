@@ -13,6 +13,7 @@ data class Memo(
     val latitude: Double = 0.0,
     var detail: String,
     var priority: PriorityColor = PriorityColor.RED,
+    var locationName: String = "",
     var checked: Boolean = false,
     var expand: Boolean = false,
     var isClamped: Boolean = false

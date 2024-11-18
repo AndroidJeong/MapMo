@@ -231,7 +231,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 0.0,
                 "",
                 PriorityColor.RED,
-                false,
+                "",
                 false,
                 false
             )
