@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeong.mapmo.R
 import com.jeong.mapmo.data.common.LocationService
 import com.jeong.mapmo.data.common.MemoResult
+import com.jeong.mapmo.data.common.toastCommon
 import com.jeong.mapmo.databinding.FragmentMemoBinding
 import com.jeong.mapmo.ui.adapter.MemoAdapter
 import com.jeong.mapmo.ui.adapter.SwipeHelper

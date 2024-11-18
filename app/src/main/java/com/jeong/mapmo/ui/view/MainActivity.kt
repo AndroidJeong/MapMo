@@ -15,6 +15,7 @@ import com.jeong.mapmo.data.common.LocationService
 import com.jeong.mapmo.databinding.ActivityMainBinding
 import com.jeong.mapmo.ui.view.onboarding.OnboardingActivity
 
+
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {

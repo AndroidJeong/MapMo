@@ -66,4 +66,14 @@ class MemoViewModel : ViewModel() {
 
         }
     }
+
+
+    fun searchMemo(title: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            //memoList.value
+
+        }
+    }
+
+
 }

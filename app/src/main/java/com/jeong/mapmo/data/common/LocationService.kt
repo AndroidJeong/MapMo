@@ -81,13 +81,24 @@ class LocationService : Service() {
             //채널을 NotificationManager에 등록
             manager.createNotificationChannel(channel)
             manager.createNotificationChannel(noVibrationChannel)
+            //SupervisorJob 을 쓴다면 에러발생시 부모까지 전파가 안되고 자식까지만
+//            CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
+//                while (isActive) {
+//                    Log.d("location2", "onStartCommand, memoList: $memoList")
+//                    Log.d("location2", "isForeground = true")
+//                    getLocation(applicationContext)
+//                    //수정 시간수정하기
+//                    delay(1 * 30 * 1000)
+//
+//                }
+//            }
         }
 
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
-        //SupervisorJob 을 쓴다면 에러발생시 부모까지 전파가 안되고 자식까지만
+//
+//        //SupervisorJob 을 쓴다면 에러발생시 부모까지 전파가 안되고 자식까지만
         CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
             while (isActive) {
                 Log.d("location2", "onStartCommand, memoList: $memoList")
@@ -106,14 +117,15 @@ class LocationService : Service() {
         memoList.clear()
         Log.d("location2", "getMemo()")
         CoroutineScope(Dispatchers.IO).launch {
-            repository.getAllMemo().catch {
-                Log.d("location2", "room error")
-            }.collectLatest { it ->
+            repository.getAllMemo().collectLatest { it ->
+                Log.d("location2", "memo: $it")
+
                 if (it.isNotEmpty()) {
                     it.forEach {
                         isSameLocation(
                             Memo(
                                 it.title,
+                                it.location,
                                 it.longitude,
                                 it.latitude,
                                 it.detail,
@@ -249,6 +261,7 @@ class LocationService : Service() {
         }
     }
 
+    //수정하기, 트러블슈팅, 향후 계획
     fun calculateDistance(
         lat1: Double, lon1: Double,
         lat2: Double, lon2: Double
@@ -265,7 +278,7 @@ class LocationService : Service() {
 
         Log.d("location2", "거리계산: ${distance}, ${lat1}, ${lon1}, ${lat2}, ${lon2}")
 
-        return (distance <= 1)
+        return (distance <= 20)
     }
 
 }
