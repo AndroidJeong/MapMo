@@ -42,7 +42,6 @@ import com.naver.maps.map.overlay.CircleOverlay
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
@@ -150,6 +149,15 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         moveToUserLocation()
         memoViewModel.getMemo()
+        viewLifecycleOwner.lifecycleScope.launch {
+            memoViewModel.memoList.collect { result ->
+                if (result is MemoResult.Success) {
+                    displayMemoMarkers(result.resultData)
+                } else {
+                    displayMemoMarkers(emptyList())
+                }
+            }
+        }
     }
 
     private fun moveToUserLocation() {
@@ -271,16 +279,6 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
         viewModel.fabVisible.observe(viewLifecycleOwner) {
             binding.fabMemoAdd.visibility = if (it) View.VISIBLE else View.GONE
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            memoViewModel.memoList.collectLatest { result ->
-                if (result is MemoResult.Success) {
-                    displayMemoMarkers(result.resultData)
-                } else {
-                    displayMemoMarkers(emptyList())
-                }
-            }
         }
     }
 
