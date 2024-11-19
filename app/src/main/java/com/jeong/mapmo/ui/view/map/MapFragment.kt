@@ -12,12 +12,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.jeong.mapmo.R
+import com.jeong.mapmo.data.common.MemoResult
 import com.jeong.mapmo.data.common.PriorityColor
 import com.jeong.mapmo.data.dto.Memo
 import com.jeong.mapmo.data.remote.KakaoSearchService
@@ -27,6 +29,7 @@ import com.jeong.mapmo.databinding.FragmentMapBinding
 import com.jeong.mapmo.domain.model.Place
 import com.jeong.mapmo.domain.usecase.SearchPlacesUseCase
 import com.jeong.mapmo.ui.view.map.component.SearchResultAdapter
+import com.jeong.mapmo.ui.viewModel.MemoViewModel
 import com.jeong.mapmo.util.BaseFragment
 import com.jeong.mapmo.util.Constants.API_KEY
 import com.naver.maps.geometry.LatLng
@@ -39,6 +42,7 @@ import com.naver.maps.map.overlay.CircleOverlay
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
+import kotlinx.coroutines.launch
 
 class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate),
     OnMapReadyCallback {
@@ -49,9 +53,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val useCase = SearchPlacesUseCase(repository)
         MapViewModelFactory(useCase)
     }
+    private val memoViewModel by viewModels<MemoViewModel>()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationSource: FusedLocationSource
     private val markers = mutableListOf<Marker>()
+    private val memoMarkers = mutableListOf<Marker>()
     private var naverMap: NaverMap? = null
     private var locationCircle: CircleOverlay? = null
     private val searchAdapter by lazy { SearchResultAdapter() }
@@ -142,6 +148,16 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         }
 
         moveToUserLocation()
+        memoViewModel.getMemo()
+        viewLifecycleOwner.lifecycleScope.launch {
+            memoViewModel.memoList.collect { result ->
+                if (result is MemoResult.Success) {
+                    displayMemoMarkers(result.resultData)
+                } else {
+                    displayMemoMarkers(emptyList())
+                }
+            }
+        }
     }
 
     private fun moveToUserLocation() {
@@ -171,7 +187,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
                 location.let {
                     updateUserLocationCircle(userLatLng)
-                    val cameraUpdate = CameraUpdate.scrollAndZoomTo(userLatLng, 17.0)
+                    val cameraUpdate = CameraUpdate.scrollAndZoomTo(userLatLng, 16.0)
                     map.moveCamera(cameraUpdate)
                 }
             } else {
@@ -188,7 +204,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             color = ColorUtils.setAlphaComponent(yellow, 30)
             outlineColor = yellow
             outlineWidth = 3
-            radius = 50.0
+            radius = 100.0
             map = naverMap
         }
     }
@@ -204,7 +220,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 captionTextSize = 16f
                 map = naverMap
                 setOnClickListener {
-                    viewModel.onMarkerClicked(markerName = place.name)
+                    viewModel.onMarkerClicked(place)
                     hideKeyboard()
                     Toast.makeText(requireContext(), "메모를 작성해주세요.", Toast.LENGTH_SHORT).show()
                     true
@@ -225,16 +241,30 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val memo = Memo(
                 "",
                 viewModel.selectedMarkerName.value.toString(),
-                0.0,
-                0.0,
+                viewModel.selectedLongitude.value ?: 0.0,
+                viewModel.selectedLatitude.value ?: 0.0,
                 "",
                 PriorityColor.RED,
-                "",
+                viewModel.selectedMarkerName.value.toString(),
                 false,
                 false
             )
             val action = MapFragmentDirections.actionMapFragmentToMemoAddFragment(memo)
             findNavController().navigate(action)
+        }
+    }
+
+    private fun displayMemoMarkers(memoList: List<Memo>) {
+        memoList.forEach { memo ->
+            val marker = Marker().apply {
+                position = LatLng(memo.latitude, memo.longitude)
+                icon = MarkerIcons.BLACK
+                iconTintColor = ContextCompat.getColor(requireContext(), memo.priority.color)
+                captionText = memo.title
+                captionTextSize = 16f
+                map = naverMap
+            }
+            memoMarkers.add(marker)
         }
     }
 

@@ -7,7 +7,6 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.jeong.mapmo.domain.model.Place
 import com.jeong.mapmo.domain.usecase.SearchPlacesUseCase
-import com.naver.maps.geometry.LatLng
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -28,6 +27,12 @@ class MapViewModel(
 
     private val _selectedMarkerName = MutableLiveData<String?>()
     val selectedMarkerName: LiveData<String?> get() = _selectedMarkerName
+
+    private val _selectedLongitude = MutableLiveData<Double?>()
+    val selectedLongitude: LiveData<Double?> get() = _selectedLongitude
+
+    private val _selectedLatitude = MutableLiveData<Double?>()
+    val selectedLatitude: LiveData<Double?> get() = _selectedLatitude
 
     private val searchQuery = MutableLiveData<String>()
 
@@ -62,12 +67,13 @@ class MapViewModel(
         }
     }
 
-    fun onMarkerClicked(markerName: String) {
-        _selectedMarkerName.value = markerName
+    fun onMarkerClicked(place: Place) {
+        _selectedMarkerName.value = place.name
+        _selectedLongitude.value = place.longitude
+        _selectedLatitude.value = place.latitude
         _fabVisible.value = true
     }
 
-    // FAB 클릭 이벤트
     fun onFabClicked() {
         _fabVisible.value = false
     }
