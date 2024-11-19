@@ -2,7 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MapMo" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/yellow</item>
+        <item name="colorSecondaryContainer">@color/white</item>
 
         <!-- StatusBar -->
         <item name="android:statusBarColor">@color/yellow</item>
