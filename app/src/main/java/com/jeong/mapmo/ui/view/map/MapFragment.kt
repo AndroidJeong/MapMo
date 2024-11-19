@@ -82,6 +82,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 val cameraUpdate = CameraUpdate.scrollTo(LatLng(place.latitude, place.longitude))
                 map.moveCamera(cameraUpdate)
                 binding.searchResultsRecyclerView.visibility = View.GONE
+                hideKeyboard()
             } else {
                 Toast.makeText(requireContext(), "지도가 초기화되지 않았습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -181,17 +182,14 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     private fun updateUserLocationCircle(location: LatLng) {
         val yellow = ContextCompat.getColor(requireContext(), R.color.yellow)
-        if (locationCircle == null) {
-            locationCircle = CircleOverlay().apply {
-                center = location
-                color = ColorUtils.setAlphaComponent(yellow, 30)
-                outlineColor = yellow
-                outlineWidth = 3
-                radius = 50.0
-                map = naverMap
-            }
-        } else {
-            locationCircle?.center = location
+
+        locationCircle = CircleOverlay().apply {
+            center = location
+            color = ColorUtils.setAlphaComponent(yellow, 30)
+            outlineColor = yellow
+            outlineWidth = 3
+            radius = 50.0
+            map = naverMap
         }
     }
 
@@ -201,7 +199,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val marker = Marker().apply {
                 position = LatLng(place.latitude, place.longitude)
                 icon = MarkerIcons.BLACK
-                iconTintColor = ContextCompat.getColor(requireContext(), R.color.yellow)
+                iconTintColor = ContextCompat.getColor(requireContext(), R.color.blue)
                 captionText = place.name
                 captionTextSize = 16f
                 map = naverMap
