@@ -171,7 +171,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
                 location.let {
                     updateUserLocationCircle(userLatLng)
-                    val cameraUpdate = CameraUpdate.scrollAndZoomTo(userLatLng, 17.0)
+                    val cameraUpdate = CameraUpdate.scrollAndZoomTo(userLatLng, 16.0)
                     map.moveCamera(cameraUpdate)
                 }
             } else {
@@ -188,7 +188,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             color = ColorUtils.setAlphaComponent(yellow, 30)
             outlineColor = yellow
             outlineWidth = 3
-            radius = 50.0
+            radius = 100.0
             map = naverMap
         }
     }
@@ -204,7 +204,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
                 captionTextSize = 16f
                 map = naverMap
                 setOnClickListener {
-                    viewModel.onMarkerClicked(markerName = place.name)
+                    viewModel.onMarkerClicked(place)
                     hideKeyboard()
                     Toast.makeText(requireContext(), "메모를 작성해주세요.", Toast.LENGTH_SHORT).show()
                     true
@@ -225,11 +225,11 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val memo = Memo(
                 "",
                 viewModel.selectedMarkerName.value.toString(),
-                0.0,
-                0.0,
+                viewModel.selectedLongitude.value ?: 0.0,
+                viewModel.selectedLatitude.value ?: 0.0,
                 "",
                 PriorityColor.RED,
-                "",
+                viewModel.selectedMarkerName.value.toString(),
                 false,
                 false
             )
