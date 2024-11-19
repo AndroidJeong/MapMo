@@ -63,10 +63,8 @@ class MemoViewModel : ViewModel() {
                         )
                     } else _memoList.emit(MemoResult.NoConstructor)
                 }
-
         }
     }
-
 
     fun searchMemo(title: String) {
         viewModelScope.launch(Dispatchers.IO) {
