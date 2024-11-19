@@ -201,7 +201,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
             val marker = Marker().apply {
                 position = LatLng(place.latitude, place.longitude)
                 icon = MarkerIcons.BLACK
-                iconTintColor = ContextCompat.getColor(requireContext(), R.color.yellow)
+                iconTintColor = ContextCompat.getColor(requireContext(), R.color.blue)
                 captionText = place.name
                 captionTextSize = 16f
                 map = naverMap
